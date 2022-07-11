@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MyBatisCodeHelperDatasource">
+    <option name="projectProfile">
+      <ProjectProfile>
+        <option name="javaMapperPackage" value="vip.ashes.water_meow.test" />
+        <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
+        <option name="javaModelPackage" value="vip.ashes.water_meow.bean" />
+        <option name="javaModelPath" value="$PROJECT_DIR$/src/main/java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="WaterMeowInn" />
+        <option name="lombokDataAnnotation" value="true" />
+        <option name="lombokNoArgsConstructor" value="true" />
+        <option name="moduleNameToPackageAndPathMap">
+          <map>
+            <entry key="WaterMeowInn">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="vip.ashes.water_meow.test" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="javaModelPacakge" value="vip.ashes.water_meow.bean" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/src/main/java" />
+                  <option name="xmlPackage" value="vip.ashes.water_meow.test" />
+                  <option name="xmlPath" value="1" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="tableGenerateConfigs">
+          <map>
+            <entry key="WaterMeowInn:hotel">
+              <value>
+                <TableGenerateConfig>
+                  <option name="javaModelName" value="Hotel" />
+                  <option name="moduleName" value="WaterMeowInn" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="WaterMeowInn:order">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="order_id" />
+                  <option name="javaModelName" value="Order" />
+                  <option name="moduleName" value="WaterMeowInn" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+          </map>
+        </option>
+        <option name="xmlMapperPackage" value="vip.ashes.water_meow.test" />
+        <option name="xmlMapperPath" value="1" />
+      </ProjectProfile>
+    </option>
+  </component>
+</project>
