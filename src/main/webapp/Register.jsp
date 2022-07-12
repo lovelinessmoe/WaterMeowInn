@@ -5,84 +5,93 @@
   Time: 17:29
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Register</title>
     <style>
-        *{margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
         body {
             background: url(imgs/pink.jpg) no-repeat center 0px fixed;
             background-size: cover;
         }
+
         .login {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 35%;
+            left: 48%;
             margin: -150px 0 0 -150px;
-            width:300px;
-            height:300px;
+            width: 320px;
+            height: 300px;
         }
+
         .login h1 {
-            color:#555555;
-            text-shadow: 0px 10px 10px #CDC673;
-            letter-spacing:2px;text-align:center;
-            margin-bottom:20px;
+            color: #B4A0FF;
+            text-shadow: 0px 10px 10px #9CA8B8;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 20px;
+            margin-left: 10px;
         }
-        input{
-            padding:10px;
-            width:100%;
-            color:white;
-            margin-bottom:10px;
-            background-color: #555555;
-            border: 1px solid black;
-            border-radius:5px;
-            letter-spacing:2px;
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+            /*background-color: #555555;*/
+            border: none;
+            border-radius: 5px;
+            letter-spacing: 2px;
         }
-        label{
-            color: #555555;
+
+        label {
+            color: #1781B5;
         }
-        .button{
-            margin-left: 30px;
-            width:100px;
-            padding:10px;
-            margin-bottom:10px;
-            background-color:#555555;
-            border:1px solid black;
-            border-radius:5px;
-            cursor:pointer;
+
+        .button {
+            margin-left: 40px;
+            width: 100px;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: whitesmoke;
+            background-color: #CCC1D2;
+            /*border: 1px solid black;*/
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 <div class="headtop"></div>
 <div class="login">
-    <h1>Login</h1>
-    <form action = "UserServlet?type=register" method = "post">
+    <h1>Register</h1>
+    <form action="UserServlet?type=register" method="post">
         <label>
-            Account:<input type="text" name="account"/><br>
-        </label>
+            账号:&nbsp&nbsp&nbsp<input type="text" name="account"/>
+        </label><br><br>
         <label>
-            Password:<input type="text" name="password"/><br>
-        </label>
+            密码:&nbsp&nbsp&nbsp<input type="text" name="password"/>
+        </label><br><br>
         <label>
-            Name:<input type="text" name="name"/><br>
-        </label>
+            姓名:&nbsp&nbsp&nbsp<input type="text" name="name"/>
+        </label><br><br>
         <label>
-            Sex:<input type="text" name="sex"/><br>
-        </label>
+            性别:&nbsp&nbsp&nbsp<input type="text" name="sex"/>
+        </label><br><br>
         <label>
-            Birthday:<input type="text" name="birth"/><br>
-        </label>
+            生日:&nbsp&nbsp&nbsp<input type="text" name="birth"/>
+        </label><br><br>
         <label>
-            TEL:<input type="text" name="mob"/><br>
+            电话:&nbsp&nbsp&nbsp<input type="text" name="mob"/>
         </label>
         <br><br><br>
-        <input class="button" type = "button" value = "Login" onclick=jumpLogin()>
-        <input class="button" type = "submit" value = "Register" >
+        <input class="button" type="button" value="Login" onclick=jumpLogin()>
+        <input class="button" type="submit" value="Register">
     </form>
 </div>
 
