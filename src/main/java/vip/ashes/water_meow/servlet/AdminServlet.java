@@ -35,11 +35,11 @@ public class AdminServlet extends HttpServlet {
         AdminService editUser = new AdminService();
 
         switch (type) {
-            /*case "cfList":
-                ArrayList<CFBean> cfList = manageCFProject.queryCFList();
-                request.setAttribute("cfList", cfList);
+            case "cfList":
+//                ArrayList<CFBean> cfList = manageCFProject.queryCFList();
+//                request.setAttribute("cfList", cfList);
                 request.getRequestDispatcher("AdminCenter1.jsp").forward(request, response);
-                break;*/
+                break;
             case "userList":
                 ArrayList<UserBean> ubList = manageUser.queryUserList();
                 request.setAttribute("ubList", ubList);
@@ -57,7 +57,7 @@ public class AdminServlet extends HttpServlet {
                     cfBean.setId(0);
                 }
                 request.setAttribute("editingCFBean", cfBean);
-                request.getRequestDispatcher("cfEdit.jsp").forward(request, response);
+                request.getRequestDispatcher("hotelEdit.jsp").forward(request, response);
                 break;
             }*/
             case "editCFHandle": {

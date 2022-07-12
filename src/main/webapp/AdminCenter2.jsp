@@ -5,14 +5,25 @@
   Time: 11:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>管理用户</title>
     <style>
-        *{margin:0px;padding:0px;}
-        li{list-style:none;float:left;width:100px;height:50px;text-align:center;}
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        li {
+            list-style: none;
+            float: left;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+        }
+
         * {
             margin: 0px;
             padding: 0px;
@@ -40,7 +51,7 @@
             text-align: center;
         }
 
-        .navbar-main_part1:hover{
+        .navbar-main_part1:hover {
             background-color: #363432;
         }
 
@@ -51,7 +62,7 @@
             text-align: center;
         }
 
-        .navbar-main_part2:hover{
+        .navbar-main_part2:hover {
             background-color: #363432;
         }
 
@@ -62,7 +73,7 @@
             text-align: center;
         }
 
-        .navbar-main_part3:hover{
+        .navbar-main_part3:hover {
             background-color: #363432;
         }
 
@@ -94,9 +105,11 @@
             text-align: center;
         }
 
-        tr:hover {background-color: #f5f5f5;}
+        tr:hover {
+            background-color: #f5f5f5;
+        }
 
-        th{
+        th {
             background-color: #3F3F3F;
             color: white;
             text-align: center;
@@ -113,13 +126,15 @@
 <body>
 <form action="AdminServlet" method="post">
     <div class="navbar-fluid">
-
         <div class="navbar-main">
             <a href="AdminServlet?type=cfList">
                 <div class="navbar-main_part1">众筹管理</div>
             </a>
             <a href="AdminServlet?type=userList">
                 <div class="navbar-main_part2">用户管理</div>
+            </a>
+            <a href="">
+                <div class="navbar-main_part2">订单管理</div>
             </a>
             <a href="AdminServlet?type=logout">
                 <div class="navbar-main_part3">退出登录</div>
@@ -131,11 +146,9 @@
     <div class="clear"></div>
 
     <div class="main">
-        <h1>欢迎，${sessionScope.user.name}！</h1>
+        <h1>欢迎，管理员${sessionScope.user.name}！</h1>
 
         <div class="main_right" style="background-color: white;">
-
-
             <div>
                 <table class="table">
                     <tr>
@@ -169,31 +182,31 @@
 </form>
 
 
-    <a href="AdminServlet?type=editUser&id=0">添加</a>
-    <script type="text/javascript" src="js/jquery.js"></script>
+<a href="AdminServlet?type=editUser&id=0">添加</a>
+<script type="text/javascript" src="js/jquery.js"></script>
 
-    <script>
-        function deleteUser(id) {
-            var r = confirm("确定要删除该方案吗？");
-            if (r === true) {
-                $.ajax({
-                    type: "post",
-                    url: "AdminServlet?type=deleteUser",
-                    data: {id:id},
-                    dataType: "json",
-                    success: function(data){
-                        if(data.status==="success"){
-                            alert(data.message);
-                            window.location.href="AdminServlet?type=userList";
-                        }else{
-                            alert(data.message);
-                        }
+<script>
+    function deleteUser(id) {
+        var r = confirm("确定要删除该用户信息吗？");
+        if (r === true) {
+            $.ajax({
+                type: "post",
+                url: "AdminServlet?type=deleteUser",
+                data: {id: id},
+                dataType: "json",
+                success: function (data) {
+                    if (data.status === "success") {
+                        alert(data.message);
+                        window.location.href = "AdminServlet?type=userList";
+                    } else {
+                        alert(data.message);
                     }
-                });
-            } else {
-                return false;
-            }
+                }
+            });
+        } else {
+            return false;
         }
-    </script>
+    }
+</script>
 </body>
 </html>

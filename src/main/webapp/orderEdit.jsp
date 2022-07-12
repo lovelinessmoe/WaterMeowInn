@@ -1,16 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: 刺猬
-  Date: 2021/6/25
-  Time: 19:39
+  Date: 2022/7/12
+  Time: 10:27
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE html>
-<html lang="en" >
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>用户信息</title>
+    <title>订单信息</title>
 
     <style>
         * {
@@ -22,7 +20,7 @@
             margin: 0;
             font-family: 'Nunito', sans-serif;
             background-color: #262527;
-            overflow:hidden;
+            overflow: hidden;
         }
 
         input, textarea, button {
@@ -33,7 +31,7 @@
             width: 100%;
             height: 100vh;
             color: #fae881;
-            overflow:hidden;
+            overflow: hidden;
         }
 
         .flex_box {
@@ -60,7 +58,7 @@
             background-color: rgba(222, 239, 248, 0.877);
             border: 0px transparent;
             border-radius: 5px;
-            color:rgb(97, 4, 184);
+            color: rgb(97, 4, 184);
             font-size: 16px;
             word-break: break-all; /* haven't found the best solution here yet, paragraphs are difficult to deal with */
             hyphens: auto;
@@ -144,24 +142,17 @@
             color: rgb(140, 145, 216);
         }
     </style>
-
 </head>
 <body>
-
 <div class="wrapper flex_box">
     <form method="post" action="AdminServlet?type=editUserHandle">
         <input type="hidden" value="${editingUserBean.id }" name="id">
-        账号：<input type="text" name="account" value="${editingUserBean.account }"><br>
-        密码：<input type="text" name="password" value="${editingUserBean.password }"><br>
-        姓名：<input type="text" name="name" value="${editingUserBean.name }"><br>
-        性别：<input type="text" name="sex" value="${editingUserBean.sex }"><br>
-        生日：<input type="text" name="birth" value="${editingUserBean.birth }"><br>
-        TEL ：<input type="text" name="mob" value="${editingUserBean.mob }"><br>
-        类型：<input type="text" name="type1" value="${editingUserBean.type }"><br>
+        订单号：<input type="text" name="order_id" value="${editingUserBean.order_id }"><br>
+        用户ID：<input type="text" name="user_id" value="${editingUserBean.user_id }"><br>
+        房间号：<input type="text" name="room_num" value="${editingUserBean.room_num }"><br>
+        状态：<input type="text" name="state" value="${editingUserBean.state }"><br>
         <input type="submit" value="提交" style="color: black;margin-left: 110px">
     </form>
 </div>
-
-
 </body>
 </html>
