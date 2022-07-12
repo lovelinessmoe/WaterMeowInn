@@ -50,7 +50,7 @@
         }
 
         label {
-            color: #1781B5;
+            color: whitesmoke;
         }
 
         .button {
