@@ -69,18 +69,12 @@
         .navbar-main_part3 {
             height: 50px;
             width: 150px;
-            float: left;
+            float: right;
             text-align: center;
         }
 
         .navbar-main_part3:hover {
             background-color: #363432;
-        }
-
-        .main_left a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
         }
 
         .clear {
@@ -103,6 +97,14 @@
             margin: 10px 120px 30px 10px;
             line-height: 40px;
             text-align: center;
+        }
+
+        table #ae {
+            color: cadetblue;
+        }
+
+        table #ad {
+            color: crimson;
         }
 
         tr:hover {
@@ -152,10 +154,11 @@
             <div>
                 <table class="table">
                     <tr>
-                        <td>订单号</td>
-                        <td>用户ID</td>
-                        <td>房间号</td>
-                        <td>状态</td>
+                        <th>订单号</th>
+                        <th>用户ID</th>
+                        <th>房间号</th>
+                        <th>状态</th>
+                        <th>操作</th>
                     </tr>
                     <c:forEach items="${cfList }" var="item">
                         <tr>
@@ -163,8 +166,10 @@
                             <td>${item.user_id }</td>
                             <td>${item.room_num }</td>
                             <td>${item.state }</td>
-                            <td><a href="AdminServlet?type=editCF&id=${item.id }">编辑</a></td>
-                            <td><a href="javascript:deleteCF(${item.id });">删除</a></td>
+                            <td>
+                                <a id="ae" href="AdminServlet?type=editCF&id=${item.id }">编辑</a>
+                                <a id="ad" href="javascript:deleteCF(${item.id });">删除</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>

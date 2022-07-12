@@ -69,7 +69,7 @@
         .navbar-main_part3 {
             height: 50px;
             width: 150px;
-            float: left;
+            float: right;
             text-align: center;
         }
 
@@ -77,14 +77,16 @@
             background-color: #363432;
         }
 
-        .main_left a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-        }
-
         .clear {
             clear: both;
+        }
+
+        .main_left {
+            width: 400px;
+            height: 500px;
+            margin-top: 50px;
+            margin-left: 50px;
+            float: left;
         }
 
         .main_right {
@@ -105,6 +107,14 @@
             text-align: center;
         }
 
+        table #ae {
+            color: cadetblue;
+        }
+
+        table #ad {
+            color: crimson;
+        }
+
         tr:hover {
             background-color: #f5f5f5;
         }
@@ -121,6 +131,15 @@
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
         }
+
+        .btn_add {
+            width: 80px;
+            height: 35px;
+            background-color: #3F3F3F;
+            text-decoration: none;
+            color: whitesmoke;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -128,7 +147,7 @@
     <div class="navbar-fluid">
         <div class="navbar-main">
             <a href="AdminServlet?type=cfList">
-                <div class="navbar-main_part1">众筹管理</div>
+                <div class="navbar-main_part1">酒店管理</div>
             </a>
             <a href="AdminServlet?type=userList">
                 <div class="navbar-main_part2">用户管理</div>
@@ -147,19 +166,24 @@
 
     <div class="main">
         <h1>欢迎，管理员${sessionScope.user.name}！</h1>
-
+        <div class="main_left" style="background-color: gray;">
+            <a href="AdminServlet?type=editUser&id=0">
+                <button type="button" class="btn_add">录入</button>
+            </a>
+        </div>
         <div class="main_right" style="background-color: white;">
             <div>
                 <table class="table">
                     <tr>
-                        <td>ID</td>
-                        <td>账号</td>
-                        <td>密码</td>
-                        <td>用户名</td>
-                        <td>性别</td>
-                        <td>生日</td>
-                        <td>手机号</td>
-                        <td>用户类型</td>
+                        <th>ID</th>
+                        <th>账号</th>
+                        <th>密码</th>
+                        <th>用户名</th>
+                        <th>性别</th>
+                        <th>生日</th>
+                        <th>手机号</th>
+                        <th>用户类型</th>
+                        <th>操作</th>
                     </tr>
                     <c:forEach items="${ubList }" var="item">
                         <tr>
@@ -171,8 +195,10 @@
                             <td>${item.birth }</td>
                             <td>${item.mob }</td>
                             <td>${item.type }</td>
-                            <td><a href="AdminServlet?type=editUser&id=${item.id }">编辑</a></td>
-                            <td><a href="javascript:deleteUser(${item.id });">删除</a></td>
+                            <td>
+                                <a id="ae" href="AdminServlet?type=editUser&id=${item.id }">编辑</a>
+                                <a id="ad" href="javascript:deleteUser(${item.id });">删除</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -181,8 +207,6 @@
     </div>
 </form>
 
-
-<a href="AdminServlet?type=editUser&id=0">添加</a>
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script>

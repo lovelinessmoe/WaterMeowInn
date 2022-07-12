@@ -156,7 +156,7 @@
         姓名：<input type="text" name="name" value="${editingUserBean.name }"><br>
         性别：<input type="text" name="sex" value="${editingUserBean.sex }"><br>
         生日：<input type="text" name="birth" value="${editingUserBean.birth }"><br>
-        TEL ：<input type="text" name="mob" value="${editingUserBean.mob }"><br>
+        电话：<input type="text" name="mob" value="${editingUserBean.mob }"><br>
         类型：<input type="text" name="type1" value="${editingUserBean.type }"><br>
         <input type="submit" value="提交" style="color: black;margin-left: 110px">
     </form>

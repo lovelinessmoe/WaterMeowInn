@@ -160,9 +160,9 @@
 <div class="wrapper flex_box">
     <form method="post" action="AdminServlet?type=editCFHandle">
         <input type="hidden" value="${editingCFBean.id }" name="id">
-        房间号：<input type="text" name="room_num" value="${editingCFBean.room_num }"><br>
+        房间：<input type="text" name="room_num" value="${editingCFBean.room_num }"><br>
         价格：<input type="text" name="price" value="${editingCFBean.price }"><br>
-        房间类型：<input type="text" name="type" value="${editingCFBean.type }"><br>
+        房型：<input type="text" name="type" value="${editingCFBean.type }"><br>
         状态：<input type="text" name="state" value="${editingCFBean.state }"><br>
         <input type="submit" value="提交" style="color: black;margin-left: 120px ">
     </form>

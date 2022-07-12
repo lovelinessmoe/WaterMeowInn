@@ -150,7 +150,7 @@
         订单号：<input type="text" name="order_id" value="${editingUserBean.order_id }"><br>
         用户ID：<input type="text" name="user_id" value="${editingUserBean.user_id }"><br>
         房间号：<input type="text" name="room_num" value="${editingUserBean.room_num }"><br>
-        状态：<input type="text" name="state" value="${editingUserBean.state }"><br>
+        状&nbsp&nbsp&nbsp态：<input type="text" name="state" value="${editingUserBean.state }"><br>
         <input type="submit" value="提交" style="color: black;margin-left: 110px">
     </form>
 </div>
