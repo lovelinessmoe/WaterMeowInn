@@ -39,3 +39,10 @@
 0:0:0:0:0:0:0:1 - - [11/Jul/2022:16:47:43 +0800] "GET /js/script.js HTTP/1.1" 404 975 http-bio-8080-exec-6 6
 0:0:0:0:0:0:0:1 - - [11/Jul/2022:16:48:29 +0800] "GET /UserServlet?type=query HTTP/1.1" 200 5384 http-bio-8080-exec-7 63
 0:0:0:0:0:0:0:1 - - [11/Jul/2022:16:48:29 +0800] "GET /js/script.js HTTP/1.1" 404 975 http-bio-8080-exec-9 3
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:33:59 +0800] "GET / HTTP/1.1" 302 - http-bio-8080-exec-2 1020
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:33:59 +0800] "GET /Login.jsp HTTP/1.1" 200 2588 http-bio-8080-exec-3 89
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:34:00 +0800] "GET /imgs/pink.jpg HTTP/1.1" 200 6664596 http-bio-8080-exec-4 622
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:42:17 +0800] "GET /Login.jsp HTTP/1.1" 200 2588 http-bio-8080-exec-1 113
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:42:17 +0800] "GET /imgs/pink.jpg HTTP/1.1" 304 - http-bio-8080-exec-3 7
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:42:18 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8080-exec-4 4
+0:0:0:0:0:0:0:1 - - [11/Jul/2022:17:43:54 +0800] "GET /Login.jsp HTTP/1.1" 200 2588 http-bio-8080-exec-6 3
