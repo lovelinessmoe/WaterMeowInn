@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author loveliness
+ */
 @WebServlet(name = "AdminServlet", urlPatterns = "/AdminServlet")
 public class AdminServlet extends HttpServlet {
     @Override
@@ -21,8 +24,6 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         String type = request.getParameter("type");
         AdminService manageCFProject = new AdminService();
         AdminService manageUser = new AdminService();
