@@ -8,12 +8,12 @@ import java.sql.*;
 public class JDBCUtil {
     private static final String url="jdbc:mysql://localhost:3306/WaterMeowInn?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false";
     private static final String user="root";
-    private static final String password="CAOshunmiao6moe";
+    private static final String password="123456";
 
     //注册驱动
     static{
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -16,124 +16,109 @@
             margin: 0px;
             padding: 0px;
         }
-
         .navbar-fluid {
             height: 50px;
             width: 100%;
             background-color: #3c4043;
             line-height: 50px
         }
-
-
         .navbar-main a {
             color: white;
             font-size: 16px;
             text-decoration: none;
         }
-
-
         .main_left a {
             text-decoration: none;
             color: white;
             font-size: 18px;
         }
-
         .clear {
             clear: both;
         }
-
         .main_right {
-            margin-right: 40px;
-            width: 920px;
-            border: 10px solid white;
+            margin: 0 auto;
+            background-color: pink;
+            border: 10px solid pink;
             border-radius: 5px;
-            float: right;
-            margin-top: 35px;
+            margin-top: 0px;
             margin-bottom: 90px;
         }
-
         table {
-            width: 900px;
+            width: 100%;
             border-collapse: collapse;
             margin: 10px 120px 30px 10px;
             line-height: 40px;
             text-align: center;
         }
-
         tr:hover {
             background-color: #f5f5f5;
         }
-
         th {
             background-color: #3F3F3F;
             color: white;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
-
         td {
             height: 30px;
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
         }
-
         .navbar-fluid {
             color: whitesmoke;
         }
-
+        .title{
+            margin-top: 30px;
+            text-align: center;
+            background-color: #b69269;
+        }
+        .text{
+            font-size: 25px;
+        }
+        #yd{
+            height: 25px;
+            width: 50px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-
 <form action="UserServlet" method="post">
     <div class="navbar-fluid">
-        <h1>欢迎，${sessionScope.user.name}！</h1>
+        <h1>${sessionScope.user.name}！欢迎光临</h1>
     </div>
 
-    <a class="clear"></a>
-    <div class="clear"></div>
+<%--    <a class="clear"></a>--%>
+<%--    <div class="clear"></div>--%>
 
     <div class="main">
-
-
-        <div class="main_right" style="background-color: white;">
-
-
+        <div class="title">
+            <span class="text">全部房间</span>
+        </div>
+        <div class="main_right">
             <div>
                 <table class="table">
-
                     <tr>
                         <td>门牌号</td>
                         <td>价格</td>
                         <td>房间类型</td>
                         <td>房间状态</td>
-                        <td>众筹金额</td>
-                        <td>已筹金额</td>
-                        <td>进度</td>
+                        <td>操作</td>
                     </tr>
                     <c:forEach items="${hotelList }" var="item">
                         <tr>
                             <td>${item.roomNum }</td>
                             <td>${item.price }</td>
-                            <td>${item.type }</td>
-                            <td>${item.state }</td>
-                            <td>
-                                <div class="button"><a href="javascript:fundMoney1(${item.roomNum });">捐赠￥10</a></div>
-                            </td>
-                            <td>
-                                <div class="button"><a href="javascript:fundMoney2(${item.roomNum });">捐赠￥50</a></div>
-                            </td>
-                            <td>
-                                <div class="button"><a href="javascript:fundMoney3(${item.roomNum });">捐赠￥100</a></div>
-                            </td>
+                            <td>${item.type eq 0? "单人间":(item.type eq 1? "双人大床房":"标间")}</td>
+                            <td>${item.state eq 0? "空闲":(item.state eq 1? "已预定":"已入住")}</td>
+                            <td><a id="yd${item.roomNum }" onclick="changeState('${item.roomNum }')" href="PayServlet?type=yd">预定</a></td>
                         </tr>
                     </c:forEach>
                 </table>
-                <br>
-                <a href="UserServlet?type=logout">退出登录</a>
-
             </div>
         </div>
+        <br>
+        <a href="UserServlet?type=logout">退出登录</a>
     </div>
 </form>
 
@@ -143,71 +128,10 @@
 <script src="js/script.js"></script>
 
 <script>
-    function fundMoney3(id) {
-        var r = confirm("要向该项目捐赠￥100吗？");
-        if (r === true) {
-            $.ajax({
-                type: "post",
-                url: "UserServlet?type=increase&value=100",
-                data: {id: id},
-                dataType: "json",
-                success: function (data) {
-                    if (data.status === "success") {
-                        alert(data.message);
-                        window.location.href = "UserServlet?type=query";
-                    } else {
-                        alert(data.message);
-                    }
-                }
-            });
-        } else {
-            return false;
-        }
+    function changeState(id){
+        document.getElementById("yd"+id).innerHTML='取消预定'
     }
 
-    function fundMoney2(id) {
-        var r = confirm("要向该项目捐赠￥50吗？");
-        if (r === true) {
-            $.ajax({
-                type: "post",
-                url: "UserServlet?type=increase&value=50",
-                data: {id: id},
-                dataType: "json",
-                success: function (data) {
-                    if (data.status === "success") {
-                        alert(data.message);
-                        window.location.href = "UserServlet?type=query";
-                    } else {
-                        alert(data.message);
-                    }
-                }
-            });
-        } else {
-            return false;
-        }
-    }
-
-    function fundMoney1(id) {
-        var r = confirm("要向该项目捐赠￥10吗？");
-        if (r === true) {
-            $.ajax({
-                type: "post",
-                url: "UserServlet?type=increase&value=10",
-                data: {id: id},
-                dataType: "json",
-                success: function (data) {
-                    if (data.status === "success") {
-                        alert(data.message);
-                        window.location.href = "UserServlet?type=query";
-                    } else {
-                        alert(data.message);
-                    }
-                }
-            });
-        } else {
-            return false;
-        }
-    }
 </script>
 </body>
 </html>
