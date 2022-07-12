@@ -179,7 +179,8 @@
 </form>
 
 
-<a href="AdminServlet?type=editCF&id=0">添加</a>
+<%--<a href="AdminServlet?type=editCF&id=0">添加</a>--%>
+<a href="hotelEdit.jsp">添加</a>
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script>

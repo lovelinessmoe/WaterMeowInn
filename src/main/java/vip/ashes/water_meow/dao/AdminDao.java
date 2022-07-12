@@ -1,8 +1,10 @@
 package vip.ashes.water_meow.dao;
 
+import vip.ashes.water_meow.bean.Hotel;
 import vip.ashes.water_meow.bean.UserBean;
 import vip.ashes.water_meow.util.JDBCUtil;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -275,5 +277,30 @@ public class AdminDao {
             JDBCUtil.closeJDBC(conn,pstm,null);
         }
         return rs;
+    }
+
+    /**
+     * 管理员添加房间
+     * @return
+     */
+    public int addHotelInfo(String roomNum,BigDecimal price,String type,String state){
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "insert into hotel(room_num,price,type,state) values (?,?,?,?)";
+
+        PreparedStatement pstm = null;
+        int res = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1,roomNum);
+            pstm.setBigDecimal(2,price);
+            pstm.setString(3,type);
+            pstm.setString(4,state);
+            res = pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            JDBCUtil.closeJDBC(conn,pstm,null);
+        }
+        return res;
     }
 }

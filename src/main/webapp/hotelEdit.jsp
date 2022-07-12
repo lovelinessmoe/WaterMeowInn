@@ -158,19 +158,46 @@
 <body>
 
 <div class="wrapper flex_box">
-    <form method="post" action="AdminServlet?type=editCFHandle">
+    <form method="post" action="">
         <input type="hidden" value="${editingCFBean.id }" name="id">
-        房间：<input type="text" name="room_num" value="${editingCFBean.room_num }"><br>
+        房间：<input type="text" name="roomNum" value="${editingCFBean.roomNum }"><br>
         价格：<input type="text" name="price" value="${editingCFBean.price }"><br>
         房型：<input type="text" name="type" value="${editingCFBean.type }"><br>
         状态：<input type="text" name="state" value="${editingCFBean.state }"><br>
-        <input type="submit" value="提交" style="color: black;margin-left: 120px ">
+        <input type="submit" onclick="saveOrEdit()" value="提交" style="color: black;margin-left: 120px ">
     </form>
 </div>
 
 <div class="cover"></div>
 
 <script src="js/script.js"></script>
+<script>
+    function saveOrEdit(id) {
+        if($["name='id'"].val()){
+            //修改
+        }else{
+            //保存
+            var r = confirm("确定要添加该项酒店信息吗？");
+            if (r === true) {
+                $.ajax({
+                    type: "post",
+                    url: "?type=addHotelInfo",
+                    data:{id:$["name='id'"].val(),roomNum:$["name='roomNum'"].val(),
+                    price:$["name='price'"].val(),type:$["name='type'"].val(),state:$["name='state'"].val()},
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status === "success") {
+                            alert(data.message);
+                            window.location.href = "AdminServlet?type=cfList";
+                        } else {
+                            alert(data.message);
+                        }
+                    }
+                });
+            }
+        }
+    }
+</script>
 
 </body>
 </html>

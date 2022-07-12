@@ -1,15 +1,22 @@
 package vip.ashes.water_meow.service;
 
+import vip.ashes.water_meow.bean.Hotel;
 import vip.ashes.water_meow.bean.UserBean;
 import vip.ashes.water_meow.dao.AdminDao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class AdminService {
     AdminDao adminDao = new AdminDao();
-//    public ArrayList<CFBean> queryCFList() {
-//        return adminDao.getCFlist();
-//    }
+
+    /**
+     * 管理员录入信息
+     * @return
+     */
+    public int addHotelInfo(String roomNum, BigDecimal price,String type,String state){
+        return adminDao.addHotelInfo(roomNum,price,type,state);
+    }
 
     public ArrayList<UserBean> queryUserList() {
         return adminDao.getUserList();

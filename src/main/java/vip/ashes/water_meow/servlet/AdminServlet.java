@@ -1,5 +1,6 @@
 package vip.ashes.water_meow.servlet;
 
+import vip.ashes.water_meow.bean.Hotel;
 import vip.ashes.water_meow.bean.UserBean;
 import vip.ashes.water_meow.service.AdminService;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -105,6 +107,32 @@ public class AdminServlet extends HttpServlet {
                 break;
             }
 
+            //管理员添加房子
+            case "addHotelInfo": {
+
+
+
+                String roomNum = request.getParameter("roomNum");
+                Double p = Double.parseDouble(request.getParameter("price"));
+                BigDecimal price = BigDecimal.valueOf(p);
+                String type1 = request.getParameter("type");
+                String state = request.getParameter("state");
+
+                System.out.println(roomNum+price+type1+state);
+
+            HashMap<String, String> map = new HashMap<>();
+            if(addCF.addHotelInfo(roomNum,price,type1,state)>0){
+                response.sendRedirect("AdminServlet?type=cfList");
+
+                map.put("status", "success");
+                map.put("message", "添加成功");
+            } else {
+                map.put("status", "error");
+                map.put("message", "添加失败");
+            }
+            response.getWriter().print(map);
+            break;
+        }
 
             //管理用户
 
