@@ -8,7 +8,7 @@ import java.sql.*;
 public class JDBCUtil {
     private static final String url="jdbc:mysql://localhost:3306/WaterMeowInn?serverTimezone=UTC&characterEncoding=utf8&useUnicode=true&useSSL=false";
     private static final String user="root";
-    private static final String password="20010727";
+    private static final String password="CAOshunmiao6moe";
 
     //注册驱动
     static{

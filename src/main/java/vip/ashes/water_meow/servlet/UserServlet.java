@@ -29,11 +29,11 @@ public class UserServlet extends HttpServlet {
         UserService userService = new UserService();
         HotelService hotelService = new HotelService();
 
-        if (type.equals("query")) {
+        if ("query".equals(type)) {
             ArrayList<Hotel> hotelList = hotelService.getHotelList();
             request.setAttribute("hotelList", hotelList);
             request.getRequestDispatcher("UserCenter.jsp").forward(request, response);
-        } else if (type.equals("increase")) {
+        } else if ("increase".equals(type)) {
             float value = Float.parseFloat(request.getParameter("value"));
             String id = request.getParameter("id");
             int rs = userService.raiseMoneyMount(id,value);
@@ -49,10 +49,10 @@ public class UserServlet extends HttpServlet {
             }
 //            JSONObject json = JSONObject.fromObject(map);
             response.getWriter().print(map);
-        } else if (type.equals("logout")) {
+        } else if ("logout".equals(type)) {
             request.getSession().invalidate();
             response.sendRedirect("Login.jsp");
-        } else if (type.equals("register")){
+        } else if ("register".equals(type)){
             String account = request.getParameter("account");
             String password = request.getParameter("password");
             String name = request.getParameter("name");

@@ -33,9 +33,9 @@ public class LoginServlet extends HttpServlet {
         if(account.equals(userBean.getAccount()) && password.equals(userBean.getPassword())) {
             session.setAttribute("user",userBean);
             System.out.println("登录成功");
-            if (userBean.getType().equals("1")){
+            if ("1".equals(userBean.getType())){
                 response.sendRedirect("AdminServlet?type=cfList");
-            }else if (userBean.getType().equals("2")){
+            }else if ("2".equals(userBean.getType())){
                 response.sendRedirect("UserServlet?type=query");
             }
         }else {
