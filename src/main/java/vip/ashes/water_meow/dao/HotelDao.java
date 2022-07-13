@@ -1,6 +1,7 @@
 package vip.ashes.water_meow.dao;
 
 import vip.ashes.water_meow.bean.Hotel;
+import vip.ashes.water_meow.bean.Order;
 import vip.ashes.water_meow.util.JDBCUtil;
 
 import java.sql.Connection;
@@ -62,5 +63,21 @@ public class HotelDao {
             JDBCUtil.closeJDBC(conn, pstm, rs);
         }
         return hotel;
+    }
+
+    public void updateHotleState(String state, String roomNum) {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "update hotel set state = ? where room_num = ?";
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, state);
+            pstm.setString(2, roomNum);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm, null);
+        }
     }
 }
