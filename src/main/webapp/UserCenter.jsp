@@ -16,25 +16,30 @@
             margin: 0px;
             padding: 0px;
         }
+
         .navbar-fluid {
             height: 50px;
             width: 100%;
             background-color: #3c4043;
             line-height: 50px
         }
+
         .navbar-main a {
             color: white;
             font-size: 16px;
             text-decoration: none;
         }
+
         .main_left a {
             text-decoration: none;
             color: white;
             font-size: 18px;
         }
+
         .clear {
             clear: both;
         }
+
         .main_right {
             margin: 0 auto;
             background-color: pink;
@@ -43,6 +48,7 @@
             margin-top: 0px;
             margin-bottom: 90px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -50,32 +56,39 @@
             line-height: 40px;
             text-align: center;
         }
+
         tr:hover {
             background-color: #f5f5f5;
         }
+
         th {
             background-color: #3F3F3F;
             color: white;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
+
         td {
             height: 30px;
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
         }
+
         .navbar-fluid {
             color: whitesmoke;
         }
-        .title{
+
+        .title {
             margin-top: 30px;
             text-align: center;
             background-color: #b69269;
         }
-        .text{
+
+        .text {
             font-size: 25px;
         }
-        #yd{
+
+        #yd {
             height: 25px;
             width: 50px;
             cursor: pointer;
@@ -88,8 +101,8 @@
         <h1>${sessionScope.user.name}！欢迎光临</h1>
     </div>
 
-<%--    <a class="clear"></a>--%>
-<%--    <div class="clear"></div>--%>
+    <%--    <a class="clear"></a>--%>
+    <%--    <div class="clear"></div>--%>
 
     <div class="main">
         <div class="title">
@@ -111,7 +124,16 @@
                             <td>${item.price }</td>
                             <td>${item.type eq 0? "单人间":(item.type eq 1? "双人大床房":"标间")}</td>
                             <td>${item.state eq 0? "空闲":(item.state eq 1? "已预定":"已入住")}</td>
-                            <td><a id="yd${item.roomNum }" onclick="changeState('${item.roomNum }')" href="PayServlet?type=yd">预定</a></td>
+                            <td>
+                                <c:if test="${item.state==0}">
+                                    <a id="yd${item.roomNum}" onclick="changeState('${item.roomNum}')"
+                                       href="PayServlet?roomNum=${item.roomNum}">预定</a>
+                                </c:if>
+                                <c:if test="${item.state!=0}">
+                                    <a id="yd${item.roomNum}" href="javascript:;">已被预定</a>
+                                </c:if>
+
+                            </td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -128,8 +150,8 @@
 <script src="js/script.js"></script>
 
 <script>
-    function changeState(id){
-        document.getElementById("yd"+id).innerHTML='取消预定'
+    function changeState(id) {
+        document.getElementById("yd" + id).innerHTML = '取消预定'
     }
 
 </script>

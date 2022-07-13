@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class HotelDao {
     public ArrayList<Hotel> getHotelList() {
         Connection conn = JDBCUtil.getConnection();
-        String sql = "select * from hotel";
+        String sql = "select * from hotel order by hotel.state";
         PreparedStatement pstm = null;
         ResultSet rs = null;
         ArrayList<Hotel> list = new ArrayList<>();
@@ -32,11 +32,35 @@ public class HotelDao {
                 list.add(hotel);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm, rs);
         }
         return list;
+    }
+
+    public Hotel getHotelByNum(String roomNum) {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "select * from hotel where room_num = ?";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Hotel hotel = new Hotel();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, roomNum);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                hotel.setRoomNum(rs.getString("room_num"));
+                hotel.setPrice(rs.getBigDecimal("price"));
+                hotel.setType(rs.getString("type"));
+                hotel.setState(rs.getString("state"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm, rs);
+        }
+        return hotel;
     }
 }

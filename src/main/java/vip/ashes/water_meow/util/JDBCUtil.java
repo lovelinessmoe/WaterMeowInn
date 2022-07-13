@@ -13,9 +13,8 @@ public class JDBCUtil {
     //注册驱动
     static{
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -26,7 +25,6 @@ public class JDBCUtil {
         try {
             conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return conn;
@@ -43,7 +41,6 @@ public class JDBCUtil {
             try {
                 conn.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -52,7 +49,6 @@ public class JDBCUtil {
             try {
                 pstm.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -61,7 +57,6 @@ public class JDBCUtil {
             try {
                 rs.close();
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 public class UserDao {
     public int increaseRaised(String id, float value) {
-        // TODO Auto-generated method stub
         Connection conn = JDBCUtil.getConnection();
         System.out.println("dao.value:"+value);
         String sql = "UPDATE cf SET raised = raised + ?,pct = raised / est * 100 where id=?";
@@ -20,7 +19,6 @@ public class UserDao {
             pstm.setString(2, id);
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm,null);
@@ -44,7 +42,6 @@ public class UserDao {
             pstm.setString(6, mob);
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm,null);

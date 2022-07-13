@@ -35,7 +35,6 @@ public class AdminDao {
                 list.add(cfBean);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm, rs);
@@ -66,7 +65,6 @@ public class AdminDao {
                 list.add(userBean);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm, rs);
@@ -96,7 +94,6 @@ public class AdminDao {
                 cfBean.setPct(rs.getInt("pct"));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm, rs);
@@ -120,7 +117,6 @@ public class AdminDao {
             pstm.setInt(7, Integer.parseInt(id));
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm,null);
@@ -143,7 +139,6 @@ public class AdminDao {
             pstm.setFloat(6, Float.parseFloat(pct));
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn,pstm,null);
@@ -161,7 +156,6 @@ public class AdminDao {
             pstm.setString(1, id);
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn,pstm,null);
@@ -203,7 +197,6 @@ public class AdminDao {
                 userBean.setType(rs.getString("type"));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm, rs);
@@ -228,7 +221,6 @@ public class AdminDao {
             pstm.setInt(8, Integer.parseInt(id));
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn, pstm,null);
@@ -247,7 +239,6 @@ public class AdminDao {
             pstm.setInt(1, id);
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn,pstm,null);
@@ -271,7 +262,6 @@ public class AdminDao {
             pstm.setString(7, type1);
             rs = pstm.executeUpdate();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             JDBCUtil.closeJDBC(conn,pstm,null);

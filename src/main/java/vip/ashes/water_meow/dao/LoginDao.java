@@ -26,7 +26,6 @@ public class LoginDao {
                 userBean2.setType(rs.getString("type"));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }finally {
             JDBCUtil.closeJDBC(conn,psmt,rs);
