@@ -19,7 +19,9 @@ public class JDBCUtil {
         }
     }
 
-    /*获取数据库连接对象*/
+    /**
+     * 获取数据库连接对象
+     * */
     public static Connection getConnection(){
         Connection conn = null;
         try {
@@ -30,7 +32,7 @@ public class JDBCUtil {
         return conn;
     }
 
-    /*
+    /**
         关闭数据库连接
         关闭Connection 数据库连接对象
         关闭PreparedStatement sql语句预处理对象

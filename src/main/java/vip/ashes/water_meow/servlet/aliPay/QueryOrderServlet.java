@@ -24,7 +24,8 @@ public class QueryOrderServlet extends HttpServlet {
 
         AlipayTradeQueryResponse query = Factory.Payment.Common().query(out_trade_no);
 
-        response.getWriter().println(query.msg);
+        response.getWriter().println(query.httpBody);
+//        response.getWriter().println(query.msg);
     }
 
     @Override
