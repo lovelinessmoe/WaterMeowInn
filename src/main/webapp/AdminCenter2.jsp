@@ -141,6 +141,9 @@
             cursor: pointer;
         }
     </style>
+
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
 </head>
 <body>
 <form action="AdminServlet" method="post">
@@ -166,7 +169,9 @@
 
     <div class="main">
         <h1>欢迎，管理员${sessionScope.user.name}！</h1>
-        <div class="main_left" style="background-color: gray;">
+        <div class="main_left">
+            <div id="echart" style="width: 400px;height:400px;"></div>
+
             <a href="AdminServlet?type=editUser&id=0">
                 <button type="button" class="btn_add">录入</button>
             </a>
@@ -184,6 +189,7 @@
                         <th>手机号</th>
                         <th>用户类型</th>
                         <th>操作</th>
+                        a
                     </tr>
                     <c:forEach items="${ubList }" var="item">
                         <tr>
@@ -209,7 +215,38 @@
 
 <script type="text/javascript" src="js/jquery.js"></script>
 
-<script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('echart'));
+
+    myChart.showLoading();  // 开启 loading 效果
+
+    $.get('/getEchartData?type=userTypeList', function (ret) {
+        console.log(ret);
+        myChart.hideLoading();  // 隐藏 loading 效果
+        myChart.setOption({
+            title: {
+                text: '用户统计'
+            },
+            series: [
+                {
+                    name: '访问来源',
+                    type: 'pie',    // 设置图表类型为饼图
+                    radius: '60%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                    // data: [          // 数据数组，name 为数据项名称，value 为数据项值
+                    //     {value: 235, name: '管理员'},
+                    //     {value: 274, name: '用户'},
+                    // ]
+                    data: ret.data
+                }
+            ]
+        })
+    }, 'json')
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    // myChart.setOption(option);
+
     function deleteUser(id) {
         var r = confirm("确定要删除该用户信息吗？");
         if (r === true) {
