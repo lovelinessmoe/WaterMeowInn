@@ -238,7 +238,7 @@
                         //     {value: 235, name: '管理员'},
                         //     {value: 274, name: '用户'},
                         // ]
-                        data: result.data
+                        data: result
                     }
                 ]
             })

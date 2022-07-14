@@ -25,10 +25,11 @@ public class EchartServlet extends HttpServlet {
 
         if ("userTypeList".equals(type)) {
             EchartService echartService = new EchartService();
-            HashMap<Object, Object> map = new HashMap<>(1);
+//            HashMap<Object, Object> map = new HashMap<>(1);
             String s = echartService.queryUserTypeList();
-            map.put("data",s);
-            response.getWriter().println(map);
+//            map.put("data",s);
+
+            response.getWriter().println(s);
         }
     }
 }
