@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class HotelService {
     HotelDao hotelDao = new HotelDao();
 
-    public ArrayList<Hotel> getHotelList(){
+    public ArrayList<Hotel> getHotelList() {
         return hotelDao.getHotelList();
     }
 
@@ -19,7 +19,7 @@ public class HotelService {
         return hotelDao.getHotelByNum(roomNum);
     }
 
-    public void live(String roomNum) {
-        hotelDao.live(roomNum);
+    public void updateHotleState(String state, String roomNum) {
+        hotelDao.updateHotleState(state, roomNum);
     }
 }

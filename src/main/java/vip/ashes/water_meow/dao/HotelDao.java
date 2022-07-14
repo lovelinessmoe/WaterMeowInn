@@ -80,22 +80,4 @@ public class HotelDao {
             JDBCUtil.closeJDBC(conn, pstm, null);
         }
     }
-
-    public void live(String roomNum) {
-        Connection conn = JDBCUtil.getConnection();
-        String sql = "update hotel set state = 2 where room_num = ?";
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        Hotel hotel = new Hotel();
-
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setString(1, roomNum);
-            pstm.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.closeJDBC(conn, pstm, rs);
-        }
-    }
 }

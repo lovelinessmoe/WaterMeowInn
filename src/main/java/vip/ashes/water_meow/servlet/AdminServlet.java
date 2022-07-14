@@ -116,28 +116,27 @@ public class AdminServlet extends HttpServlet {
             case "addHotelInfo": {
 
 
-
                 String roomNum = request.getParameter("roomNum");
                 Double p = Double.parseDouble(request.getParameter("price"));
                 BigDecimal price = BigDecimal.valueOf(p);
                 String type1 = request.getParameter("type");
                 String state = request.getParameter("state");
 
-                System.out.println(roomNum+price+type1+state);
+                System.out.println(roomNum + price + type1 + state);
 
-            HashMap<String, String> map = new HashMap<>();
-            if(addCF.addHotelInfo(roomNum,price,type1,state)>0){
-                response.sendRedirect("AdminServlet?type=cfList");
+                HashMap<String, String> map = new HashMap<>();
+                if (addCF.addHotelInfo(roomNum, price, type1, state) > 0) {
+                    response.sendRedirect("AdminServlet?type=cfList");
 
-                map.put("status", "success");
-                map.put("message", "添加成功");
-            } else {
-                map.put("status", "error");
-                map.put("message", "添加失败");
+                    map.put("status", "success");
+                    map.put("message", "添加成功");
+                } else {
+                    map.put("status", "error");
+                    map.put("message", "添加失败");
+                }
+                response.getWriter().print(map);
+                break;
             }
-            response.getWriter().print(map);
-            break;
-        }
 
             //管理用户
 
@@ -198,17 +197,23 @@ public class AdminServlet extends HttpServlet {
                 response.getWriter().print(map);
                 break;
             }
-            case "listAllOrder":{
+            case "listAllOrder": {
 
                 ArrayList<Order> odlt = orderService.listAllOrder();
                 request.setAttribute("odlt", odlt);
                 request.getRequestDispatcher("AdminCenter3.jsp").forward(request, response);
                 break;
             }
-            case "live":{
-                String roomNum = request.getParameter("roomNum");
-                hotelService.live(roomNum);
-                response.sendRedirect("AdminServlet?type=listAllOrder");
+            case "live": {
+                String orderId = request.getParameter("orderId");
+                Order order = orderService.getOrderByID(orderId);
+                if ("0".equals(order.getState()) || "2".equals(order.getState())) {
+                    request.setAttribute("hotel_order_msg", "该订单未支付");
+                    request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
+                } else {
+                    hotelService.updateHotleState("2",order.getRoomNum());
+                    response.sendRedirect("AdminServlet?type=listAllOrder");
+                }
                 break;
             }
             default:
