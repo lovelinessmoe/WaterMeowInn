@@ -122,7 +122,14 @@
             border-bottom: 1px solid #ddd;
         }
         .cz{
-         text-decoration: none;
+            text-decoration: none;
+
+        }
+        #rz{
+            color: cadetblue;
+        }
+        #td{
+            color: crimson;
         }
     </style>
 </head>
@@ -172,8 +179,9 @@
                             <td>${item.state eq 0? "未支付":(item.state eq 1? "已支付":"已退款")}</td>
                             <td>${item.price }</td>
                             <td>
-                                <a class="cz" href="">入住</a>
-                                <a class="cz" href="">退订</a>
+                                <a id="rz" class="cz" href="AdminServlet?type=live&roomNum=${item.roomNum }">入住</a>&nbsp
+                                <a id="js" class="cz" href="">结束订单</a>&nbsp
+                                <a id="td" class="cz" href="">退订</a>
                             </td>
                         </tr>
                     </c:forEach>

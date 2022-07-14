@@ -18,4 +18,8 @@ public class HotelService {
     public Hotel getHotelByNum(String roomNum) {
         return hotelDao.getHotelByNum(roomNum);
     }
+
+    public void live(String roomNum) {
+        hotelDao.live(roomNum);
+    }
 }
