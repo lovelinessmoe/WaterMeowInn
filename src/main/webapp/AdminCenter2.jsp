@@ -189,7 +189,6 @@
                         <th>手机号</th>
                         <th>用户类型</th>
                         <th>操作</th>
-                        a
                     </tr>
                     <c:forEach items="${ubList }" var="item">
                         <tr>
@@ -223,7 +222,9 @@
 
     $.ajax({
         url: "/getEchartData?type=userTypeList", success: function (result) {
+            result = JSON.parse(result);
             console.log(result);
+
             myChart.hideLoading();  // 隐藏 loading 效果
             myChart.setOption({
                 title: {
