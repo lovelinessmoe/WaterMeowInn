@@ -2,6 +2,7 @@ package vip.ashes.water_meow.dao;
 
 
 import cn.hutool.json.JSONObject;
+import com.google.gson.Gson;
 import vip.ashes.water_meow.bean.EchartBean;
 import vip.ashes.water_meow.util.JDBCUtil;
 
@@ -9,16 +10,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class echartDao {
-    public static JSONObject getUserTypeList() {
+public class EchartDao {
+    public String getUserTypeList() {
         Connection conn = JDBCUtil.getConnection();
         String sql1 = "select count(*) as admin_cnt from user where type = 1";
         String sql2 = "select count(*) as user_cnt from user where type = 2";
         PreparedStatement pstm = null;
         ResultSet rs1 = null;
         ResultSet rs2 = null;
-        JSONObject data = new JSONObject();
+        String s = "";
 
         try {
             pstm = conn.prepareStatement(sql1);
@@ -33,12 +35,11 @@ public class echartDao {
                 EchartBean user = new EchartBean();
                 user.setValue(rs2.getInt("user_cnt"));
                 user.setName("用户");
-                data.put("data", new String[]{
-                        String.valueOf(admin), String.valueOf(user)
-                });
-
-//                System.out.println("管理员数量：" + rs1.getInt("admin_cnt"));
-//                System.out.println("用户数量：" + rs2.getInt("user_cnt"));
+                ArrayList<EchartBean> echartBeans = new ArrayList<>(2);
+                echartBeans.add(admin);
+                echartBeans.add(user);
+                Gson gson = new Gson();
+                s = gson.toJson(echartBeans);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,6 +47,6 @@ public class echartDao {
             JDBCUtil.closeJDBC(conn, pstm, rs1);
             JDBCUtil.closeJDBC(conn, pstm, rs2);
         }
-        return data;
+        return s;
     }
 }

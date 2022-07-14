@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * @author loveliness
+ */
 @WebFilter("/AdminServlet")
 public class AdminFilter implements Filter {
 
@@ -19,13 +22,18 @@ public class AdminFilter implements Filter {
         //查看用户是否是管理员
         HttpSession session = request.getSession();
         UserBean user = (UserBean) session.getAttribute("user");
-        //是管理员
-        String type = user.getType();
-        if ("1".equals(type)) {
-            chain.doFilter(req, resp);
-        }else {
-            request.getSession().invalidate();
+        if (user == null) {
             response.sendRedirect("Login.jsp");
+        } else {
+            String type = user.getType();
+            //是管理员
+            if ("1".equals(type)) {
+                chain.doFilter(req, resp);
+            } else {
+                request.getSession().invalidate();
+                request.setAttribute("msg", "权限不够");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
         }
     }
 

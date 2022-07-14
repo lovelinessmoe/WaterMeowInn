@@ -221,27 +221,29 @@
 
     myChart.showLoading();  // 开启 loading 效果
 
-    $.get('/getEchartData?type=userTypeList', function (ret) {
-        console.log(ret);
-        myChart.hideLoading();  // 隐藏 loading 效果
-        myChart.setOption({
-            title: {
-                text: '用户统计'
-            },
-            series: [
-                {
-                    name: '访问来源',
-                    type: 'pie',    // 设置图表类型为饼图
-                    radius: '60%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
-                    // data: [          // 数据数组，name 为数据项名称，value 为数据项值
-                    //     {value: 235, name: '管理员'},
-                    //     {value: 274, name: '用户'},
-                    // ]
-                    data: ret.data
-                }
-            ]
-        })
-    }, 'json')
+    $.ajax({
+        url: "/getEchartData?type=userTypeList", success: function (result) {
+            console.log(result);
+            myChart.hideLoading();  // 隐藏 loading 效果
+            myChart.setOption({
+                title: {
+                    text: '用户统计'
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',    // 设置图表类型为饼图
+                        radius: '60%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                        // data: [          // 数据数组，name 为数据项名称，value 为数据项值
+                        //     {value: 235, name: '管理员'},
+                        //     {value: 274, name: '用户'},
+                        // ]
+                        data: result.data
+                    }
+                ]
+            })
+        }
+    });
 
 
     // 使用刚指定的配置项和数据显示图表。

@@ -21,8 +21,8 @@ public class JDBCUtil {
 
     /**
      * 获取数据库连接对象
-     */
-    public static Connection getConnection() {
+     * */
+    public static Connection getConnection(){
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);

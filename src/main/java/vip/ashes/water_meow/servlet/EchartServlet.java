@@ -1,6 +1,5 @@
 package vip.ashes.water_meow.servlet;
 
-import cn.hutool.json.JSONObject;
 import vip.ashes.water_meow.service.EchartService;
 
 import javax.servlet.ServletException;
@@ -25,8 +24,10 @@ public class EchartServlet extends HttpServlet {
 
         if ("userTypeList".equals(type)) {
             EchartService echartService = new EchartService();
-            JSONObject userTypeList = EchartService.queryUserTypeList();
-            System.out.println(userTypeList);
+            String s = "{'data' : ";
+            s += echartService.queryUserTypeList();
+            s += "}";
+            response.getWriter().println(s);
         }
     }
 }

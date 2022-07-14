@@ -94,6 +94,7 @@
 <div id="loginDiv">
     <form id="form" action="LoginServlet" method="post">
         <h1 style="text-align: center;color: aliceblue;">LOGIN IN</h1><br/>
+
         <label id="name_trip">
             账号：<input type="text" name="account"/><br><br/>
         </label>
@@ -102,12 +103,17 @@
             密码：<input type="password" name="password"/>
         </label>
 
+
         <div style="text-align: center;margin-top: 30px;">
             <input class="button" type="submit" value="Login">
             <br><br>
             <p class="switch">还没有账号？去&nbsp
                 <a onclick="jumpRegister()">注册</a>
             </p>
+
+            <p style="margin-top: 10px;
+            margin-left: auto;margin-right: auto;
+            color: azure;"> ${msg}</p>
         </div>
     </form>
 </div>
