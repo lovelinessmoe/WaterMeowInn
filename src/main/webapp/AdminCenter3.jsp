@@ -82,19 +82,17 @@
         }
 
         .main_right {
-            margin-right: 40px;
-            width: 920px;
+            margin: 0 auto;
             border: 10px solid white;
             border-radius: 5px;
-            float: right;
-            margin-top: 35px;
+            margin-top: 0px;
             margin-bottom: 90px;
         }
 
         table {
-            width: 900px;
+            width: 100%;
             border-collapse: collapse;
-            margin: 10px 120px 30px 10px;
+            margin: 10px 120px 0px 0px;
             line-height: 40px;
             text-align: center;
         }
@@ -123,6 +121,9 @@
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
         }
+        .cz{
+         text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -135,7 +136,7 @@
             <a href="AdminServlet?type=userList">
                 <div class="navbar-main_part2">用户管理</div>
             </a>
-            <a href="">
+            <a href="AdminServlet?type=listAllOrder">
                 <div class="navbar-main_part2">订单管理</div>
             </a>
             <a href="AdminServlet?type=logout">
@@ -151,36 +152,39 @@
         <h1>欢迎，管理员${sessionScope.user.name}！</h1>
 
         <div class="main_right" style="background-color: white;">
-            <div>
+
                 <table class="table">
                     <tr>
                         <th>订单号</th>
+                        <th>支付宝订单号</th>
                         <th>用户ID</th>
                         <th>房间号</th>
                         <th>状态</th>
+                        <th>价格</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach items="${cfList }" var="item">
+                    <c:forEach items="${odlt }" var="item">
                         <tr>
-                            <td>${item.order_id }</td>
-                            <td>${item.user_id }</td>
-                            <td>${item.room_num }</td>
-                            <td>${item.state }</td>
+                            <td>${item.orderId }</td>
+                            <td>${item.ali_id }</td>
+                            <td>${item.userId }</td>
+                            <td>${item.roomNum }</td>
+                            <td>${item.state eq 0? "未支付":(item.state eq 1? "已支付":"已退款")}</td>
+                            <td>${item.price }</td>
                             <td>
-                                <a id="ae" href="AdminServlet?type=editCF&id=${item.id }">编辑</a>
-                                <a id="ad" href="javascript:deleteCF(${item.id });">删除</a>
+                                <a class="cz" href="">入住</a>
+                                <a class="cz" href="">退订</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
-            </div>
         </div>
     </div>
 </form>
 
 
 <br>
-<a href="AdminServlet?type=editCF&id=0">添加</a>
+
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script>

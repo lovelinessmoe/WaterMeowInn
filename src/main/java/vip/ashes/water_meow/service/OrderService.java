@@ -6,6 +6,7 @@ import vip.ashes.water_meow.dao.OrderDao;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,5 +47,9 @@ public class OrderService {
 
     public void createOrder(String subject, String outTradeNo, String totalAmount, int id) {
         orderDao.createOrder(subject,outTradeNo,totalAmount,id);
+    }
+
+    public ArrayList<Order> listAllOrder() {
+         return orderDao.listAllOrder();
     }
 }

@@ -1,12 +1,15 @@
 package vip.ashes.water_meow.dao;
 
 import vip.ashes.water_meow.bean.Order;
+import vip.ashes.water_meow.bean.UserBean;
 import vip.ashes.water_meow.util.JDBCUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderDao {
     public Order getOrderByID(String outTradeNo) {
@@ -69,5 +72,34 @@ public class OrderDao {
         } finally {
             JDBCUtil.closeJDBC(conn, pstm, null);
         }
+    }
+
+    public ArrayList<Order> listAllOrder() {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "select * from `order`";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Order> list = new ArrayList<>();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Order orderbean = new Order();
+
+                orderbean.setOrderId(rs.getString("order_id"));
+                orderbean.setAli_id(rs.getString("ali_id"));
+                orderbean.setUserId(rs.getInt("user_id"));
+                orderbean.setRoomNum(rs.getString("room_num"));
+                orderbean.setState(rs.getString("state"));
+                orderbean.setPrice(rs.getBigDecimal("price"));
+                list.add(orderbean);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm, rs);
+        }
+        return list;
     }
 }

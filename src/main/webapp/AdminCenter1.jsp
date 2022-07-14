@@ -136,7 +136,7 @@
             <a href="AdminServlet?type=userList">
                 <div class="navbar-main_part2">用户管理</div>
             </a>
-            <a href="">
+            <a href="AdminServlet?type=listAllOrder">
                 <div class="navbar-main_part2">订单管理</div>
             </a>
             <a href="AdminServlet?type=logout">

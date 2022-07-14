@@ -1,8 +1,10 @@
 package vip.ashes.water_meow.servlet;
 
 import vip.ashes.water_meow.bean.Hotel;
+import vip.ashes.water_meow.bean.Order;
 import vip.ashes.water_meow.bean.UserBean;
 import vip.ashes.water_meow.service.AdminService;
+import vip.ashes.water_meow.service.OrderService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +35,7 @@ public class AdminServlet extends HttpServlet {
         AdminService addCF = new AdminService();
         AdminService editCF = new AdminService();
         AdminService deleteCFProject = new AdminService();
+        OrderService orderService = new OrderService();
 
         AdminService editUserMessage = new AdminService();
         AdminService editUser = new AdminService();
@@ -191,6 +194,13 @@ public class AdminServlet extends HttpServlet {
                 }
 //                JSONObject json = JSONObject.fromObject(map);
                 response.getWriter().print(map);
+                break;
+            }
+            case "listAllOrder":{
+
+                ArrayList<Order> odlt = orderService.listAllOrder();
+                request.setAttribute("odlt", odlt);
+                request.getRequestDispatcher("AdminCenter3.jsp").forward(request, response);
                 break;
             }
             default:
