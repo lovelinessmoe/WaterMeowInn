@@ -11,11 +11,15 @@ import java.util.ArrayList;
 public class HotelService {
     HotelDao hotelDao = new HotelDao();
 
-    public ArrayList<Hotel> getHotelList(){
+    public ArrayList<Hotel> getHotelList() {
         return hotelDao.getHotelList();
     }
 
     public Hotel getHotelByNum(String roomNum) {
         return hotelDao.getHotelByNum(roomNum);
+    }
+
+    public void updateHotleState(String state, String roomNum) {
+        hotelDao.updateHotleState(state, roomNum);
     }
 }

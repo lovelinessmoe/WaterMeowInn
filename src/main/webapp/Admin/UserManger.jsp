@@ -147,28 +147,10 @@
 </head>
 <body>
 <form action="AdminServlet" method="post">
-    <div class="navbar-fluid">
-        <div class="navbar-main">
-            <a href="AdminServlet?type=cfList">
-                <div class="navbar-main_part1">酒店管理</div>
-            </a>
-            <a href="AdminServlet?type=userList">
-                <div class="navbar-main_part2">用户管理</div>
-            </a>
-            <a href="">
-                <div class="navbar-main_part2">订单管理</div>
-            </a>
-            <a href="AdminServlet?type=logout">
-                <div class="navbar-main_part3">退出登录</div>
-            </a>
-        </div>
-    </div>
+    <%@include file="AdminHead.jsp"%>
 
-    <a class="clear"></a>
-    <div class="clear"></div>
 
     <div class="main">
-        <h1>欢迎，管理员${sessionScope.user.name}！</h1>
         <div class="main_left">
             <div id="echart" style="width: 400px;height:400px;"></div>
 
@@ -212,7 +194,7 @@
     </div>
 </form>
 
-<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
 
 <script type="text/javascript">
     // 基于准备好的dom，初始化echarts实例
