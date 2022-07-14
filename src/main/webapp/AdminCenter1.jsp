@@ -82,6 +82,14 @@
             clear: both;
         }
 
+        .main_left {
+            width: 400px;
+            height: 500px;
+            margin-top: 50px;
+            margin-left: 50px;
+            float: left;
+        }
+
         .main_right {
             margin-right: 40px;
             width: 920px;
@@ -124,7 +132,19 @@
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
         }
+
+        .btn_add {
+            width: 80px;
+            height: 35px;
+            background-color: #3F3F3F;
+            text-decoration: none;
+            color: whitesmoke;
+            cursor: pointer;
+        }
     </style>
+
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
 </head>
 <body>
 <form action="AdminServlet" method="post">
@@ -150,6 +170,15 @@
 
     <div class="main">
         <h1>欢迎，管理员${sessionScope.user.name}！</h1>
+        <div class="main_left">
+            <div id="echart" style="width: 400px;height:400px;"></div>
+
+            <a href="hotelEdit.jsp">
+                <button type="button" class="btn_add">录入</button>
+                <%--<a href="AdminServlet?type=editCF&id=0">添加</a>--%>
+                <%--<a href="hotelEdit.jsp">添加</a>--%>
+            </a>
+        </div>
         <div class="main_right" style="background-color: white;">
             <div>
                 <table class="table">
@@ -178,12 +207,44 @@
     </div>
 </form>
 
-
-<%--<a href="AdminServlet?type=editCF&id=0">添加</a>--%>
-<a href="hotelEdit.jsp">添加</a>
 <script type="text/javascript" src="js/jquery.js"></script>
 
-<script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('echart'));
+
+    myChart.showLoading();  // 开启 loading 效果
+
+    $.ajax({
+        url: "/getEchartData?type=userTypeList", success: function (result) {
+            result = JSON.parse(result);
+            console.log(result);
+
+            myChart.hideLoading();  // 隐藏 loading 效果
+            myChart.setOption({
+                title: {
+                    text: '用户统计'
+                },
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',    // 设置图表类型为饼图
+                        radius: '60%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                        // data: [          // 数据数组，name 为数据项名称，value 为数据项值
+                        //     {value: 235, name: '管理员'},
+                        //     {value: 274, name: '用户'},
+                        // ]
+                        data: result
+                    }
+                ]
+            })
+        }
+    });
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    // myChart.setOption(option);
+
     function deleteCF(id) {
         var r = confirm("确定要删除该项酒店信息吗？");
         if (r === true) {
