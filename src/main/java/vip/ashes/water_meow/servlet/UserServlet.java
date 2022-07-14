@@ -32,7 +32,7 @@ public class UserServlet extends HttpServlet {
         if ("query".equals(type)) {
             ArrayList<Hotel> hotelList = hotelService.getHotelList();
             request.setAttribute("hotelList", hotelList);
-            request.getRequestDispatcher("UserCenter.jsp").forward(request, response);
+            request.getRequestDispatcher("User/UserCenter.jsp").forward(request, response);
         } else if ("increase".equals(type)) {
             float value = Float.parseFloat(request.getParameter("value"));
             String id = request.getParameter("id");

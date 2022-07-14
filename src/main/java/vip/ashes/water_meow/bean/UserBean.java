@@ -1,6 +1,7 @@
 package vip.ashes.water_meow.bean;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author loveliness
@@ -9,6 +10,7 @@ import lombok.Data;
  * 字段分别是 账号，密码，用户名，性别，生日，手机号，用户类型）
  */
 @Data
+@NoArgsConstructor
 public class UserBean {
     private String account, password, name, sex, birth, mob, type;
     private int id;

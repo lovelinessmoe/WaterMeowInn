@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
     @Override
@@ -25,20 +25,19 @@ public class LoginServlet extends HttpServlet {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
 
-        LoginService LoginService = new LoginService();
-        HttpSession session = request.getSession();
+        LoginService loginService = new LoginService();
 
-        UserBean userBean = LoginService.Login(account, password);
+        UserBean userBean = loginService.Login(account, password);
 
-        if(account.equals(userBean.getAccount()) && password.equals(userBean.getPassword())) {
-            session.setAttribute("user",userBean);
-            System.out.println("登录成功");
-            if ("1".equals(userBean.getType())){
+        if (account.equals(userBean.getAccount()) && password.equals(userBean.getPassword())) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", userBean);
+            if ("1".equals(userBean.getType())) {
                 response.sendRedirect("AdminServlet?type=cfList");
-            }else if ("2".equals(userBean.getType())){
+            } else if ("2".equals(userBean.getType())) {
                 response.sendRedirect("UserServlet?type=query");
             }
-        }else {
+        } else {
             response.sendRedirect("Login.jsp");
         }
 

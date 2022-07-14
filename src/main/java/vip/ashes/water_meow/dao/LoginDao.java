@@ -14,22 +14,28 @@ public class LoginDao {
         PreparedStatement psmt = null;
         ResultSet rs = null;
         String sql = "select * from user where account = ? and password = ?";
-        UserBean userBean2 = new UserBean();
+        UserBean userBean = new UserBean();
+
         try {
             psmt = conn.prepareStatement(sql);
             psmt.setString(1, account);
             psmt.setString(2, password);
             rs = psmt.executeQuery();
-            if(rs.next()) {
-                userBean2.setAccount(rs.getString("account"));
-                userBean2.setPassword(rs.getString("password"));
-                userBean2.setType(rs.getString("type"));
+            if (rs.next()) {
+                userBean.setAccount(rs.getString("account"));
+                userBean.setPassword(rs.getString("password"));
+                userBean.setName(rs.getString("name"));
+                userBean.setSex(rs.getString("sex"));
+                userBean.setBirth(rs.getString("birth"));
+                userBean.setMob(rs.getString("mob"));
+                userBean.setType(rs.getString("type"));
+                userBean.setId(rs.getInt("id"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            JDBCUtil.closeJDBC(conn,psmt,rs);
+        } finally {
+            JDBCUtil.closeJDBC(conn, psmt, rs);
         }
-        return userBean2;
+        return userBean;
     }
 }

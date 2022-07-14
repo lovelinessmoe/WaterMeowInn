@@ -40,7 +40,7 @@ public class OrderService {
     }
 
     public void updateOrderFinsh(String outTradeNo, String tradeNo) {
-        Order orderByID = orderDao.getOrderByID(outTradeNo);
+        Order orderByID = getOrderByID(outTradeNo);
         hotelDao.updateHotleState("1",orderByID.getRoomNum());
         orderDao.updateOrderFinish(outTradeNo,tradeNo);
     }

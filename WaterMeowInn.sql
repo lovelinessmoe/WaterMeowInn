@@ -11,7 +11,7 @@
  Target Server Version : 80028
  File Encoding         : 65001
 
- Date: 11/07/2022 16:49:29
+ Date: 14/07/2022 17:28:42
 */
 
 SET NAMES utf8mb4;
@@ -22,18 +22,20 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `hotel`;
 CREATE TABLE `hotel` (
-  `room_num` char(6) NOT NULL COMMENT '门牌号',
+  `room_num` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '门牌号',
   `price` decimal(10,2) DEFAULT NULL,
-  `type` varchar(1) DEFAULT NULL COMMENT '0单人1双人大床2标间',
-  `state` varchar(1) DEFAULT NULL COMMENT '0未使用1已预订2已入住',
+  `type` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '0单人1双人大床2标间',
+  `state` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '0未使用1已预订2已入住',
   PRIMARY KEY (`room_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of hotel
 -- ----------------------------
 BEGIN;
 INSERT INTO `hotel` VALUES ('东八218', 1000.00, '1', '2');
+INSERT INTO `hotel` VALUES ('东八219', 50.00, '1', '0');
+INSERT INTO `hotel` VALUES ('东八220', 1000.00, '1', '1');
 COMMIT;
 
 -- ----------------------------
@@ -41,17 +43,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
-  `order_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` char(32) COLLATE utf8mb4_bin NOT NULL COMMENT 'uuid',
+  `ali_id` char(28) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '支付宝订单',
   `user_id` int DEFAULT NULL COMMENT '用户id',
-  `room_num` char(6) DEFAULT NULL COMMENT '房间门牌号',
-  `state` varchar(1) DEFAULT NULL COMMENT '0未支付1已支付',
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `room_num` char(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '房间门牌号',
+  `state` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '0' COMMENT '0未支付1已支付2已完成3已退款',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '支付价钱',
+  PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
 BEGIN;
+INSERT INTO `order` VALUES ('4960c4ff11a14f7cae2b62f29d975be5', NULL, 0, '东八219', '0', 50.00);
 COMMIT;
 
 -- ----------------------------
@@ -64,11 +69,11 @@ CREATE TABLE `user` (
   `password` varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `sex` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `birth` varchar(15) DEFAULT NULL,
+  `birth` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
   `mob` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `type` varchar(5) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of user

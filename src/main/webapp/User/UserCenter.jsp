@@ -93,16 +93,76 @@
             width: 50px;
             cursor: pointer;
         }
+
+        .navbar-fluid {
+            height: 50px;
+            width: 100%;
+            background-color: #3c4043;
+            line-height: 50px
+        }
+
+
+        .navbar-main a {
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .navbar-main_part1 {
+            background-color: #3c4043;
+            float: left;
+            height: 50px;
+            width: 150px;
+            text-align: center;
+        }
+
+        .navbar-main_part1:hover {
+            background-color: #363432;
+        }
+
+        .navbar-main_part2 {
+            height: 50px;
+            width: 150px;
+            float: left;
+            text-align: center;
+        }
+
+        .navbar-main_part2:hover {
+            background-color: #363432;
+        }
+
+        .navbar-main_part3 {
+            height: 50px;
+            width: 150px;
+            float: right;
+            text-align: center;
+        }
+
+        .navbar-main_part3:hover {
+            background-color: #363432;
+        }
+
+        .clear {
+            clear: both;
+        }
+
     </style>
 </head>
 <body>
 <form action="UserServlet" method="post">
     <div class="navbar-fluid">
-        <h1>${sessionScope.user.name}！欢迎光临</h1>
+        <div class="navbar-main">
+            <a href="#">
+                <div class="navbar-main_part1">${sessionScope.user.name} ！欢迎光临</div>
+            </a>
+            <a href="AdminServlet?type=logout">
+                <div class="navbar-main_part3">退出登录</div>
+            </a>
+        </div>
     </div>
 
-    <%--    <a class="clear"></a>--%>
-    <%--    <div class="clear"></div>--%>
+    <a class="clear"></a>
+    <div class="clear"></div>
 
     <div class="main">
         <div class="title">
@@ -140,12 +200,11 @@
             </div>
         </div>
         <br>
-        <a href="UserServlet?type=logout">退出登录</a>
     </div>
 </form>
 
 
-<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
 
 <script src="js/script.js"></script>
 

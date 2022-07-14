@@ -1,6 +1,5 @@
 package vip.ashes.water_meow.servlet;
 
-import vip.ashes.water_meow.bean.Hotel;
 import vip.ashes.water_meow.bean.Order;
 import vip.ashes.water_meow.bean.UserBean;
 import vip.ashes.water_meow.service.AdminService;
@@ -30,28 +29,20 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("type");
-        AdminService manageCFProject = new AdminService();
-        AdminService manageUser = new AdminService();
-        AdminService editCFProject = new AdminService();
-        AdminService addCF = new AdminService();
-        AdminService editCF = new AdminService();
-        AdminService deleteCFProject = new AdminService();
+        AdminService adminService = new AdminService();
         OrderService orderService = new OrderService();
         HotelService hotelService = new HotelService();
-
-        AdminService editUserMessage = new AdminService();
-        AdminService editUser = new AdminService();
 
         switch (type) {
             case "cfList":
 //                ArrayList<CFBean> cfList = manageCFProject.queryCFList();
 //                request.setAttribute("cfList", cfList);
-                request.getRequestDispatcher("AdminCenter1.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/HotelManger.jsp").forward(request, response);
                 break;
             case "userList":
-                ArrayList<UserBean> ubList = manageUser.queryUserList();
+                ArrayList<UserBean> ubList = adminService.queryUserList();
                 request.setAttribute("ubList", ubList);
-                request.getRequestDispatcher("AdminCenter2.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/UserManger.jsp").forward(request, response);
                 break;
             case "logout":
                 request.getSession().invalidate();
@@ -78,7 +69,7 @@ public class AdminServlet extends HttpServlet {
                 String pct = request.getParameter("pct");
                 System.out.println(id);
                 if (Integer.parseInt(id) > 0) {
-                    int rs = editCF.updateCF(id, pic, name, exp, est, raised, pct);
+                    int rs = adminService.updateCF(id, pic, name, exp, est, raised, pct);
                     if (rs > 0) {
                         response.sendRedirect("AdminServlet?type=cfList");
                         System.out.println("修改成功");
@@ -86,7 +77,7 @@ public class AdminServlet extends HttpServlet {
                         System.out.println("修改失败");
                     }
                 } else {
-                    int rs = addCF.insertCF(pic, name, exp, est, raised, pct);
+                    int rs = adminService.insertCF(pic, name, exp, est, raised, pct);
                     if (rs > 0) {
                         response.sendRedirect("AdminServlet?type=cfList");
                         System.out.println("添加成功");
@@ -98,7 +89,7 @@ public class AdminServlet extends HttpServlet {
             }
             case "deleteCF": {
                 String id = request.getParameter("id");
-                int rs = deleteCFProject.deleteCFProject(id);
+                int rs = adminService.deleteCFProject(id);
                 HashMap<String, String> map = new HashMap<>();
                 if (rs > 0) {
                     map.put("status", "success");
@@ -125,7 +116,7 @@ public class AdminServlet extends HttpServlet {
                 System.out.println(roomNum + price + type1 + state);
 
                 HashMap<String, String> map = new HashMap<>();
-                if (addCF.addHotelInfo(roomNum, price, type1, state) > 0) {
+                if (adminService.addHotelInfo(roomNum, price, type1, state) > 0) {
                     response.sendRedirect("AdminServlet?type=cfList");
 
                     map.put("status", "success");
@@ -143,7 +134,7 @@ public class AdminServlet extends HttpServlet {
 
             case "editUser": {
                 String id = request.getParameter("id");
-                UserBean userBean = editUserMessage.getUserMsg(id);
+                UserBean userBean = adminService.getUserMsg(id);
                 if (userBean == null) {
                     userBean = new UserBean();
                     userBean.setId(0);
@@ -163,7 +154,7 @@ public class AdminServlet extends HttpServlet {
                 String type1 = request.getParameter("type1");
                 System.out.println(id);
                 if (Integer.parseInt(id) > 0) {
-                    int rs = editUser.updateUser(id, account, password, name, sex, birth, mob, type1);
+                    int rs = adminService.updateUser(id, account, password, name, sex, birth, mob, type1);
                     if (rs > 0) {
                         response.sendRedirect("AdminServlet?type=userList");
                         System.out.println("修改成功");
@@ -171,7 +162,7 @@ public class AdminServlet extends HttpServlet {
                         System.out.println("修改失败");
                     }
                 } else {
-                    int rs = editUser.insertUser(account, password, name, sex, birth, mob, type1);
+                    int rs = adminService.insertUser(account, password, name, sex, birth, mob, type1);
                     if (rs > 0) {
                         response.sendRedirect("AdminServlet?type=userList");
                         System.out.println("添加成功");
@@ -184,7 +175,7 @@ public class AdminServlet extends HttpServlet {
             case "deleteUser": {
                 int id = Integer.parseInt(request.getParameter("id"));
                 System.out.println("id");
-                int rs = editUser.deleteUser(id);
+                int rs = adminService.deleteUser(id);
                 HashMap<String, String> map = new HashMap<>();
                 if (rs > 0) {
                     map.put("status", "success");
@@ -201,7 +192,7 @@ public class AdminServlet extends HttpServlet {
 
                 ArrayList<Order> odlt = orderService.listAllOrder();
                 request.setAttribute("odlt", odlt);
-                request.getRequestDispatcher("AdminCenter3.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/OrderManger.jsp").forward(request, response);
                 break;
             }
             case "live": {
