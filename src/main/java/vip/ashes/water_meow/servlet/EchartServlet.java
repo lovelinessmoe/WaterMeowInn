@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 @WebServlet(name = "EchartServlet", value = "/EchartServlet")
@@ -31,6 +32,10 @@ public class EchartServlet extends HttpServlet {
 //            map.put("data",s);
 
             response.getWriter().println(s);
+        } else if ("hotelStateList".equals(type)) {
+            EchartService echartService = new EchartService();
+            int[] list = echartService.queryHotelStateList();
+            response.getWriter().println(Arrays.toString(list));
         }
     }
 }

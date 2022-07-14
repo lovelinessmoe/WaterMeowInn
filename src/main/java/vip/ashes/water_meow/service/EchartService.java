@@ -9,4 +9,8 @@ public class EchartService {
     public String queryUserTypeList() {
         return echartDao.getUserTypeList();
     }
+
+    public int[] queryHotelStateList() {
+        return echartDao.getHotelStateList();
+    }
 }

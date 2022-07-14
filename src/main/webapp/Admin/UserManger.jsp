@@ -147,7 +147,7 @@
 </head>
 <body>
 <form action="AdminServlet" method="post">
-    <%@include file="AdminHead.jsp"%>
+    <%@include file="AdminHead.jsp" %>
 
 
     <div class="main">
@@ -212,9 +212,10 @@
                 title: {
                     text: '用户统计'
                 },
+                color: ['#5C7398', '#E3C3C9'],
                 series: [
                     {
-                        name: '访问来源',
+                        name: '用户类型',
                         type: 'pie',    // 设置图表类型为饼图
                         radius: '60%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
                         // data: [          // 数据数组，name 为数据项名称，value 为数据项值
