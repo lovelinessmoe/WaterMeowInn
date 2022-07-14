@@ -5,6 +5,8 @@ import vip.ashes.water_meow.config.AlipayConfig;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -13,6 +15,7 @@ import java.io.IOException;
 @WebFilter("/*")
 public class AllFilter implements Filter {
     public static boolean initFlag = false;
+
     @Override
     public void destroy() {
     }
@@ -23,8 +26,15 @@ public class AllFilter implements Filter {
             // 设置参数（全局只需设置一次）
             Factory.setOptions(AlipayConfig.getOptions());
         }
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
+
+        //转换
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        System.out.println("filter");
         chain.doFilter(req, resp);
     }
 
