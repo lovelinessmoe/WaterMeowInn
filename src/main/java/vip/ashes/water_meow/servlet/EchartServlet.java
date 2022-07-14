@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebServlet(name = "EchartServlet", value = "/EchartServlet")
 public class EchartServlet extends HttpServlet {
@@ -24,9 +25,11 @@ public class EchartServlet extends HttpServlet {
 
         if ("userTypeList".equals(type)) {
             EchartService echartService = new EchartService();
-            String s = "{'data' : ";
-            s += echartService.queryUserTypeList();
-            s += "}";
+            String s = echartService.queryUserTypeList();
+
+//            HashMap<Object, Object> map = new HashMap<>(1);
+//            map.put("data",s);
+
             response.getWriter().println(s);
         }
     }

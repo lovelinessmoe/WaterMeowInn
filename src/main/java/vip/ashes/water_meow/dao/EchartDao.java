@@ -35,6 +35,7 @@ public class EchartDao {
                 EchartBean user = new EchartBean();
                 user.setValue(rs2.getInt("user_cnt"));
                 user.setName("用户");
+
                 ArrayList<EchartBean> echartBeans = new ArrayList<>(2);
                 echartBeans.add(admin);
                 echartBeans.add(user);
