@@ -130,7 +130,7 @@
                                        href="PayServlet?roomNum=${item.roomNum}">预定</a>
                                 </c:if>
                                 <c:if test="${item.state!=0}">
-                                    <a id="yd${item.roomNum}" href="javascript:;">已被预定</a>
+                                    <a id="yd${item.roomNum}" href="javascript:;">已被使用</a>
                                 </c:if>
 
                             </td>
