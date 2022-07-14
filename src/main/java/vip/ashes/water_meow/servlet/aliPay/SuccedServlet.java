@@ -30,8 +30,6 @@ public class SuccedServlet extends HttpServlet {
 
         boolean signVerified = Factory.Payment.Common().verifyNotify(aliPayInfo);
 
-        System.out.println("Success:params");
-        System.out.println(aliPayInfo);
         if (signVerified) {
             //商户订单号
             String outTradeNo = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
@@ -42,9 +40,10 @@ public class SuccedServlet extends HttpServlet {
             //付款金额
             String totalAmount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            out.println("trade_no:" + tradeNo + "<br/>out_trade_no:" + outTradeNo + "<br/>total_amount:" + totalAmount);
+            request.setAttribute("outTradeNo",outTradeNo);
+            request.setAttribute("tradeNo",tradeNo);
+            request.setAttribute("totalAmount",totalAmount);
+            request.getRequestDispatcher("PaySuccess.jsp").forward(request, response);
         } else {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();

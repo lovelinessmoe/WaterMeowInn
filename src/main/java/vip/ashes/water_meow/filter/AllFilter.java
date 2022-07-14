@@ -34,7 +34,6 @@ public class AllFilter implements Filter {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        System.out.println("filter");
         chain.doFilter(req, resp);
     }
 
