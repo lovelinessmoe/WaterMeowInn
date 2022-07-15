@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 
 /**
  * @author loveliness
+ * 支付订单，预定
  */
 @WebServlet("/PayServlet")
 public class PayServlet extends HttpServlet {

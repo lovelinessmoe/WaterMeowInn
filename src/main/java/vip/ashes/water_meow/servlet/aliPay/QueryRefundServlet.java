@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 查询退款，也没什么用
+ * @author loveliness
+ */
 @WebServlet("/QueryRefundServlet")
 public class QueryRefundServlet extends HttpServlet {
     @SneakyThrows

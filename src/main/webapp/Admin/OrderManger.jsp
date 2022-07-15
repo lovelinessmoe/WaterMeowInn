@@ -141,7 +141,6 @@
     <%@include file="AdminHead.jsp"%>
 
     <div class="main">
-        <h1>欢迎，管理员${sessionScope.user.name}！</h1>
         <h1>${hotel_order_msg}</h1>
 
         <div class="main_right" style="background-color: white;">
@@ -167,7 +166,7 @@
                             <td id="using">
                                 <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }" >入住</a>&nbsp
                                 <a id="js" class="cz" href="">结束订单</a>&nbsp
-                                <a id="td" class="cz" href="">退订</a>
+                                <a id="td" class="cz" href="OrderServlet?type=unsubscribe&orderId=${item.orderId}">退订</a>
                             </td>
                             <td id="allover">
                                 <a>订单已结束</a>
