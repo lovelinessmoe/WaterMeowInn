@@ -73,4 +73,11 @@ public class OrderService {
         String refundAmount = order.getPrice() + "";
         return Factory.Payment.Common().refund(outTradeNo, refundAmount);
     }
+
+    public void finishOrder(Order order) {
+        hotelDao.updateHotleState("0", order.getRoomNum());
+        orderDao.updateOrderState("2",order.getOrderId());
+
+
+    }
 }

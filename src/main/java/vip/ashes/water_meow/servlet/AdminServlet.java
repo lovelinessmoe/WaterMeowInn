@@ -198,12 +198,18 @@ public class AdminServlet extends HttpServlet {
             case "live": {
                 String orderId = request.getParameter("orderId");
                 Order order = orderService.getOrderByID(orderId);
-                if ("0".equals(order.getState()) || "2".equals(order.getState())) {
+                if ("0".equals(order.getState())) {
                     request.setAttribute("hotel_order_msg", "该订单未支付");
                     request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
-                } else {
+                } else if ("1".equals(order.getState())){
                     hotelService.updateHotleState("2",order.getRoomNum());
                     response.sendRedirect("AdminServlet?type=listAllOrder");
+                }else if ("2".equals(order.getState())){
+                    request.setAttribute("hotel_order_msg", "该订单已完成");
+                    request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
+                }else if ("3".equals(order.getState())){
+                    request.setAttribute("hotel_order_msg", "该订单已退款");
+                    request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
                 }
                 break;
             }

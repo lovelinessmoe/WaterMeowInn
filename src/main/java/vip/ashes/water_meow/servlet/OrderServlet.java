@@ -24,7 +24,7 @@ public class OrderServlet extends HttpServlet {
 
         OrderService orderService = new OrderService();
         switch (type) {
-            case "unsubscribe":
+            case "unsubscribe":{
                 String orderId = (String) request.getParameter("orderId");
                 Order order = orderService.getOrderByID(orderId);
                 //预订了（支付了），没有入住或者退款
@@ -40,6 +40,18 @@ public class OrderServlet extends HttpServlet {
                 }
                 request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
                 break;
+            } case "finishorder":{
+                String orderId = (String) request.getParameter("orderId");
+                Order order = orderService.getOrderByID(orderId);
+                if ("1".equals(order.getState())){
+                    orderService.finishOrder(order);
+                    request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
+                }else {
+                    request.setAttribute("hotel_order_msg", "无效");
+                }
+
+                break;
+            }
             default:
         }
     }

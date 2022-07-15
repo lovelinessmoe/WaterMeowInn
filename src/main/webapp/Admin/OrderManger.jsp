@@ -165,7 +165,7 @@
                             <td>${item.price }</td>
                             <td id="using">
                                 <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }" >入住</a>&nbsp
-                                <a id="js" class="cz" href="">结束订单</a>&nbsp
+                                <a id="js" class="cz" href="OrderServlet?type=finishorder&orderId=${item.orderId}">结束订单</a>&nbsp
                                 <a id="td" class="cz" href="OrderServlet?type=unsubscribe&orderId=${item.orderId}">退订</a>
                             </td>
                             <td id="allover">
@@ -184,15 +184,7 @@
 <script type="text/javascript" src="../js/jquery.js"></script>
 
 <script>
-    var rz = document.getElementById("rz")
-    var allover = document.getElementById("allover")
-    var using = document.getElementById("using")
-    var roomnum = ${item.roomNum }
-    function changelook(){
-        if (item.roomNum=='2'&){
 
-        }
-    }
 </script>
 </body>
 </html>
