@@ -131,9 +131,6 @@
         #td{
             color: crimson;
         }
-        #allover{
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -164,12 +161,14 @@
                             <td>${item.state eq 0? "未支付":(item.state eq 1? "已支付":(item.state eq 2? "已完成":"已退款"))}</td>
                             <td>${item.price }</td>
                             <td id="using">
-                                <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }" >入住</a>&nbsp
-                                <a id="js" class="cz" href="OrderServlet?type=finishorder&orderId=${item.orderId}">结束订单</a>&nbsp
-                                <a id="td" class="cz" href="OrderServlet?type=unsubscribe&orderId=${item.orderId}">退订</a>
-                            </td>
-                            <td id="allover">
-                                <a>订单已结束</a>
+                                <c:if test="${item.state eq 2}">
+                                    <a class="cz" href="javascript:;">该订单已完成</a>
+                                </c:if>
+                                <c:if test="${item.state!=2}">
+                                    <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }" >入住</a>&nbsp
+                                    <a id="js" class="cz" href="OrderServlet?type=finishorder&orderId=${item.orderId}">结束订单</a>&nbsp
+                                    <a id="td" class="cz" href="OrderServlet?type=unsubscribe&orderId=${item.orderId}">退订</a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>

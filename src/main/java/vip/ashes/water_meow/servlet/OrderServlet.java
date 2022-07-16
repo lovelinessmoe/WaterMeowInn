@@ -45,10 +45,10 @@ public class OrderServlet extends HttpServlet {
                 Order order = orderService.getOrderByID(orderId);
                 if ("1".equals(order.getState())){
                     orderService.finishOrder(order);
-                    request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
                 }else {
                     request.setAttribute("hotel_order_msg", "无效");
                 }
+                request.getRequestDispatcher("AdminServlet?type=listAllOrder").forward(request, response);
 
                 break;
             }
