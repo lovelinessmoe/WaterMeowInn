@@ -1,16 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: 刺猬
-  Date: 2021/6/25
-  Time: 10:24
+  Date: 2022/7/12
+  Time: 10:06
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <html>
 <head>
-    <title>管理酒店</title>
+    <title>管理订单</title>
     <style>
         * {
             margin: 0px;
@@ -83,19 +82,17 @@
         }
 
         .main_right {
-            margin-right: 40px;
-            width: 920px;
+            margin: 0 auto;
             border: 10px solid white;
             border-radius: 5px;
-            float: right;
-            margin-top: 35px;
+            margin-top: 0px;
             margin-bottom: 90px;
         }
 
         table {
-            width: 900px;
+            width: 100%;
             border-collapse: collapse;
-            margin: 10px 120px 30px 10px;
+            margin: 10px 120px 0px 0px;
             line-height: 40px;
             text-align: center;
         }
@@ -124,68 +121,66 @@
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
         }
+        .cz{
+            text-decoration: none;
+
+        }
+        #rz{
+            color: cadetblue;
+        }
+        #td{
+            color: crimson;
+        }
     </style>
 </head>
 <body>
 <form action="AdminServlet" method="post">
-    <div class="navbar-fluid">
-        <div class="navbar-main">
-            <a href="AdminServlet?type=cfList">
-                <div class="navbar-main_part1">酒店管理</div>
-            </a>
-            <a href="AdminServlet?type=userList">
-                <div class="navbar-main_part2">用户管理</div>
-            </a>
-            <a href="">
-                <div class="navbar-main_part2">订单管理</div>
-            </a>
-            <a href="AdminServlet?type=logout">
-                <div class="navbar-main_part3">退出登录</div>
-            </a>
-        </div>
-    </div>
-
-    <a class="clear"></a>
-    <div class="clear"></div>
+    <%@include file="AdminHead.jsp"%>
 
     <div class="main">
         <h1>欢迎，管理员${sessionScope.user.name}！</h1>
+        <h1>${hotel_order_msg}</h1>
+
         <div class="main_right" style="background-color: white;">
-            <div>
+
                 <table class="table">
                     <tr>
+                        <th>订单号</th>
+                        <th>支付宝订单号</th>
+                        <th>用户ID</th>
                         <th>房间号</th>
-                        <th>价格</th>
-                        <th>房间类型</th>
                         <th>状态</th>
+                        <th>价格</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach items="${cfList }" var="item">
+                    <c:forEach items="${odlt }" var="item">
                         <tr>
-                            <td>${item.room_num }</td>
+                            <td>${item.orderId }</td>
+                            <td>${item.ali_id }</td>
+                            <td>${item.userId }</td>
+                            <td>${item.roomNum }</td>
+                            <td>${item.state eq 0? "未支付":(item.state eq 1? "已支付":"已退款")}</td>
                             <td>${item.price }</td>
-                            <td>${item.type }</td>
-                            <td>${item.state }</td>
                             <td>
-                                <a id="ae" href="AdminServlet?type=editCF&id=${item.id }">编辑</a>
-                                <a id="ad" href="javascript:deleteCF(${item.id });">删除</a>
+                                <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }">入住</a>&nbsp
+                                <a id="js" class="cz" href="">结束订单</a>&nbsp
+                                <a id="td" class="cz" href="">退订</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
-            </div>
         </div>
     </div>
 </form>
 
 
-<%--<a href="AdminServlet?type=editCF&id=0">添加</a>--%>
-<a href="hotelEdit.jsp">添加</a>
-<script type="text/javascript" src="js/jquery.js"></script>
+<br>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
 
 <script>
     function deleteCF(id) {
-        var r = confirm("确定要删除该项酒店信息吗？");
+        var r = confirm("确定要删除该订单信息吗？");
         if (r === true) {
             $.ajax({
                 type: "post",

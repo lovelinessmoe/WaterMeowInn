@@ -13,4 +13,12 @@
         <servlet-name>EchartServlet</servlet-name>
         <url-pattern>/getEchartData</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>vip.ashes.water_meow.servlet.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 </web-app>

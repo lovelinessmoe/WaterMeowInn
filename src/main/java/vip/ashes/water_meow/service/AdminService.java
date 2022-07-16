@@ -6,6 +6,7 @@ import vip.ashes.water_meow.dao.AdminDao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdminService {
     AdminDao adminDao = new AdminDao();
@@ -16,6 +17,9 @@ public class AdminService {
      */
     public int addHotelInfo(String roomNum, BigDecimal price,String type,String state){
         return adminDao.addHotelInfo(roomNum,price,type,state);
+    }
+    public ArrayList<Hotel> queryHotelList() {
+        return adminDao.getHotelList();
     }
 
     public ArrayList<UserBean> queryUserList() {
@@ -55,5 +59,21 @@ public class AdminService {
 
     public int updateUser(String id, String account, String password, String name, String sex, String birth, String mob, String type1) {
         return adminDao.editUser(id,account,password,name,sex,birth,mob,type1);
+    }
+
+    public boolean editHotelInfo(String roomNum, String price1, String type, String state) {
+        Double p = Double.parseDouble(price1);
+        BigDecimal price = BigDecimal.valueOf(p);
+        return adminDao.editHotelInfo(roomNum,price,type,state);
+    }
+
+    //根据RoomNum找到唯一房子
+    public Hotel queryByRoomNum(String roomNum) {
+        return adminDao.queryByRoomNum(roomNum);
+    }
+
+    public int delHotel(String roomNum) {
+
+        return adminDao.delHotel(roomNum);
     }
 }

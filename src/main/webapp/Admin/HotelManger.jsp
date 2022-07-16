@@ -150,7 +150,7 @@
 <form action="AdminServlet" method="post">
     <div class="navbar-fluid">
         <div class="navbar-main">
-            <a href="AdminServlet?type=cfList">
+            <a href="AdminServlet?type=hotelList">
                 <div class="navbar-main_part1">酒店管理</div>
             </a>
             <a href="AdminServlet?type=userList">
@@ -173,7 +173,9 @@
         <div class="main_left">
             <div id="echart" style="width: 400px;height:400px;"></div>
 
-            <a href="hotelEdit.jsp">
+<%--            <a href="Admin/hotelEdit.jsp">--%>
+<%--            <a href="Admin/hotelEdit.jsp&roomNum=${item.roomNum}">--%>
+            <a href="Admin/hotelEdit.jsp">
                 <button type="button" class="btn_add">录入</button>
                 <%--<a href="AdminServlet?type=editCF&id=0">添加</a>--%>
                 <%--<a href="hotelEdit.jsp">添加</a>--%>
@@ -189,15 +191,16 @@
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach items="${cfList }" var="item">
+                    <c:forEach items="${hotels }" var="item">
                         <tr>
-                            <td>${item.room_num }</td>
+                            <td>${item.roomNum }</td>
                             <td>${item.price }</td>
                             <td>${item.type }</td>
                             <td>${item.state }</td>
                             <td>
-                                <a id="ae" href="AdminServlet?type=editCF&id=${item.id }">编辑</a>
-                                <a id="ad" href="javascript:deleteCF(${item.id });">删除</a>
+                                <a id="ae" href="AdminServlet?type=queryByRoomNum&roomNum=${item.roomNum }">编辑</a>
+<%--                                <a id="ad" onclick="delHotel(${item.roomNum })">删除</a>--%>
+                                <a id="ad" href="AdminServlet?type=delHotel&roomNum=${item.roomNum }">删除</a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -251,18 +254,18 @@
     // 使用刚指定的配置项和数据显示图表。
     // myChart.setOption(option);
 
-    function deleteCF(id) {
+    function delHotel(roomNum) {
         var r = confirm("确定要删除该项酒店信息吗？");
         if (r === true) {
             $.ajax({
                 type: "post",
-                url: "AdminServlet?type=deleteCF",
-                data: {id: id},
+                url: "AdminServlet?type=delHotel&roomNum="+roomNum,
+                data: {roomNum: roomNum},
                 dataType: "json",
                 success: function (data) {
                     if (data.status === "success") {
                         alert(data.message);
-                        window.location.href = "AdminServlet?type=cfList";
+                        window.location.href = "AdminServlet?type=hotelList";
                     } else {
                         alert(data.message);
                     }
