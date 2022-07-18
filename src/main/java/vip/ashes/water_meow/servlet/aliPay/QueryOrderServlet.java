@@ -13,6 +13,7 @@ import java.io.IOException;
 
 /**
  * @author loveliness
+ * 查询订单信息，其实没什么用
  */
 @WebServlet("/QueryOrderServlet")
 public class QueryOrderServlet extends HttpServlet {

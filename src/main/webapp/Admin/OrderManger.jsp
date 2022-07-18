@@ -138,7 +138,6 @@
     <%@include file="AdminHead.jsp"%>
 
     <div class="main">
-        <h1>欢迎，管理员${sessionScope.user.name}！</h1>
         <h1>${hotel_order_msg}</h1>
 
         <div class="main_right" style="background-color: white;">
@@ -159,12 +158,17 @@
                             <td>${item.ali_id }</td>
                             <td>${item.userId }</td>
                             <td>${item.roomNum }</td>
-                            <td>${item.state eq 0? "未支付":(item.state eq 1? "已支付":"已退款")}</td>
+                            <td>${item.state eq 0? "未支付":(item.state eq 1? "已支付":(item.state eq 2? "已完成":"已退款"))}</td>
                             <td>${item.price }</td>
-                            <td>
-                                <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }">入住</a>&nbsp
-                                <a id="js" class="cz" href="">结束订单</a>&nbsp
-                                <a id="td" class="cz" href="">退订</a>
+                            <td id="using">
+                                <c:if test="${item.state eq 2}">
+                                    <a class="cz" href="javascript:;">该订单已完成</a>
+                                </c:if>
+                                <c:if test="${item.state!=2}">
+                                    <a id="rz" class="cz" href="AdminServlet?type=live&orderId=${item.orderId }" >入住</a>&nbsp
+                                    <a id="js" class="cz" href="OrderServlet?type=finishorder&orderId=${item.orderId}">结束订单</a>&nbsp
+                                    <a id="td" class="cz" href="OrderServlet?type=unsubscribe&orderId=${item.orderId}">退订</a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
@@ -179,27 +183,7 @@
 <script type="text/javascript" src="../js/jquery.js"></script>
 
 <script>
-    function deleteCF(id) {
-        var r = confirm("确定要删除该订单信息吗？");
-        if (r === true) {
-            $.ajax({
-                type: "post",
-                url: "AdminServlet?type=deleteCF",
-                data: {id: id},
-                dataType: "json",
-                success: function (data) {
-                    if (data.status === "success") {
-                        alert(data.message);
-                        window.location.href = "AdminServlet?type=cfList";
-                    } else {
-                        alert(data.message);
-                    }
-                }
-            });
-        } else {
-            return false;
-        }
-    }
+
 </script>
 </body>
 </html>

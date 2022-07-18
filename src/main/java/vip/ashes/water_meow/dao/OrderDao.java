@@ -102,4 +102,22 @@ public class OrderDao {
         }
         return list;
     }
+
+    public void updateOrderState(String refunded, String orderId) {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "update `order` set state = ? where order_id = ?";
+        PreparedStatement pstm = null;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, refunded);
+            pstm.setString(2, orderId);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm, null);
+        }
+    }
+
+
 }
