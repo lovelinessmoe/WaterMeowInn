@@ -162,7 +162,7 @@
             <div>
                 <table class="table">
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>账号</th>
                         <th>密码</th>
                         <th>用户名</th>
@@ -172,16 +172,24 @@
                         <th>用户类型</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach items="${ubList }" var="item">
+                    <c:forEach items="${ubList }" var="item" varStatus="idxStatus">
                         <tr>
-                            <td>${item.id }</td>
+                            <td>${idxStatus.index +1}</td>
                             <td>${item.account }</td>
                             <td>${item.password }</td>
                             <td>${item.name }</td>
-                            <td>${item.sex }</td>
+                            <td>${item.sex==0?"女":"男" }</td>
                             <td>${item.birth }</td>
                             <td>${item.mob }</td>
-                            <td>${item.type }</td>
+                            <td>
+                                    <%--${item.type }--%>
+                                <c:if test="${item.type==1}">
+                                    管理员
+                                </c:if>
+                                <c:if test="${item.type==2}">
+                                    用户
+                                </c:if>
+                            </td>
                             <td>
                                 <a id="ae" href="AdminServlet?type=editUser&id=${item.id }">编辑</a>
                                 <a id="ad" href="javascript:deleteUser(${item.id });">删除</a>

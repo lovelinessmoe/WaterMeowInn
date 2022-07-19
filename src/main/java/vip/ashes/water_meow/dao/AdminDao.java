@@ -12,36 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AdminDao {
-    //管理众筹
-    /*public ArrayList<CFBean> getCFlist() {
-        Connection conn = JDBCUtil.getConnection();
-        String sql = "select * from cf";
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        ArrayList<CFBean> list = new ArrayList<>();
-
-        try {
-            pstm = conn.prepareStatement(sql);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                CFBean cfBean = new CFBean();
-                cfBean.setId(rs.getInt("id"));
-                cfBean.setPic(rs.getString("pic"));
-                cfBean.setName(rs.getString("name"));
-                cfBean.setExp(rs.getString("exp"));
-                cfBean.setEst(rs.getInt("est"));
-                cfBean.setRaised(rs.getInt("raised"));
-                cfBean.setPct(rs.getInt("pct"));
-                list.add(cfBean);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.closeJDBC(conn, pstm, rs);
-        }
-        return list;
-    }*/
-
     public ArrayList<UserBean> getUserList() {
         Connection conn = JDBCUtil.getConnection();
         String sql = "select * from user";
@@ -71,35 +41,6 @@ public class AdminDao {
         }
         return list;
     }
-
-    /*public CFBean queryCFByID(String id) {
-        Connection conn = JDBCUtil.getConnection();
-        String sql = "select * from cf where id = ?";
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        CFBean cfBean = null;
-
-        try {
-            pstm = conn.prepareStatement(sql);
-            pstm.setString(1,id);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                cfBean = new CFBean();
-                cfBean.setId(rs.getInt("id"));
-                cfBean.setPic(rs.getString("pic"));
-                cfBean.setName(rs.getString("name"));
-                cfBean.setExp(rs.getString("exp"));
-                cfBean.setEst(rs.getInt("est"));
-                cfBean.setRaised(rs.getInt("raised"));
-                cfBean.setPct(rs.getInt("pct"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            JDBCUtil.closeJDBC(conn, pstm, rs);
-        }
-        return cfBean;
-    }*/
 
     public int editCF(String id, String pic, String name, String exp, String est, String raised, String pct) {
         Connection conn = JDBCUtil.getConnection();
@@ -292,5 +233,102 @@ public class AdminDao {
             JDBCUtil.closeJDBC(conn,pstm,null);
         }
         return res;
+    }
+
+    public ArrayList<Hotel> getHotelList() {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "select * from hotel";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        ArrayList<Hotel> list = new ArrayList<>();
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                Hotel hotel = new Hotel();
+                hotel.setRoomNum(rs.getString("room_num"));
+                hotel.setPrice(rs.getBigDecimal("price"));
+                hotel.setType(rs.getString("type"));
+                hotel.setState(rs.getString("state"));
+                list.add(hotel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm, rs);
+        }
+        return list;
+    }
+
+    public boolean editHotelInfo(String roomNum, BigDecimal price, String type, String state) {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "UPDATE hotel SET price=?,type=?,state=? where room_num=?";
+        PreparedStatement pstm = null;
+        int rs = 0;
+        try {
+            pstm = conn.prepareStatement(sql);
+//            pstm.setString(1, roomNum);
+            pstm.setBigDecimal(1, price);
+            pstm.setString(2, type);
+            pstm.setString(3, state);
+            pstm.setString(4, roomNum);
+            rs = pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm,null);
+        }
+        if(rs>0) return true;
+        return false;
+    }
+
+    public Hotel queryByRoomNum(String roomNum) {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "select * from hotel where room_num=?";
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Hotel hotel= null;
+
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1,roomNum);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                hotel = new Hotel();
+                hotel.setRoomNum(rs.getString("room_num"));
+                hotel.setPrice(rs.getBigDecimal("price"));
+                hotel.setType(rs.getString("type"));
+                hotel.setState(rs.getString("state"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn, pstm, rs);
+        }
+        return hotel;
+    }
+
+    /**
+     * 管理员删除房子
+     * @param roomNum
+     * @return
+     */
+    public int delHotel(String roomNum) {
+        Connection conn = JDBCUtil.getConnection();
+        String sql = "delete from hotel where room_num=?";
+        System.out.println(roomNum);
+        PreparedStatement pstm = null;
+        int rs =0;
+        try {
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, roomNum);
+            rs = pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCUtil.closeJDBC(conn,pstm,null);
+        }
+        return rs;
     }
 }

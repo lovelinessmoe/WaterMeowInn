@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", userBean);
             if ("1".equals(userBean.getType())) {
-                response.sendRedirect("AdminServlet?type=cfList");
+                response.sendRedirect("AdminServlet?type=hotelList");
             } else if ("2".equals(userBean.getType())) {
                 response.sendRedirect("UserServlet?type=query");
             }
