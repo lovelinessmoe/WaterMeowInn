@@ -181,7 +181,15 @@
                             <td>${item.sex }</td>
                             <td>${item.birth }</td>
                             <td>${item.mob }</td>
-                            <td>${item.type }</td>
+                            <td>
+                                    <%--${item.type }--%>
+                                <c:if test="${item.type==1}">
+                                    管理员
+                                </c:if>
+                                <c:if test="${item.type==2}">
+                                    用户
+                                </c:if>
+                            </td>
                             <td>
                                 <a id="ae" href="AdminServlet?type=editUser&id=${item.id }">编辑</a>
                                 <a id="ad" href="javascript:deleteUser(${item.id });">删除</a>

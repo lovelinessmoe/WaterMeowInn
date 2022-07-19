@@ -173,8 +173,8 @@
         <div class="main_left">
             <div id="echart" style="width: 400px;height:400px;"></div>
 
-<%--            <a href="Admin/hotelEdit.jsp">--%>
-<%--            <a href="Admin/hotelEdit.jsp&roomNum=${item.roomNum}">--%>
+            <%--            <a href="Admin/hotelEdit.jsp">--%>
+            <%--            <a href="Admin/hotelEdit.jsp&roomNum=${item.roomNum}">--%>
             <a href="Admin/hotelEdit.jsp">
                 <button type="button" class="btn_add">录入</button>
                 <%--<a href="AdminServlet?type=editCF&id=0">添加</a>--%>
@@ -195,11 +195,33 @@
                         <tr>
                             <td>${item.roomNum }</td>
                             <td>${item.price }</td>
-                            <td>${item.type }</td>
-                            <td>${item.state }</td>
+                            <td>
+                                    <%--${item.type }--%>
+                                <c:if test="${item.type==0}">
+                                    单人间
+                                </c:if>
+                                <c:if test="${item.type==1}">
+                                    大床房
+                                </c:if>
+                                <c:if test="${item.type==2}">
+                                    标间
+                                </c:if>
+                            </td>
+                            <td>
+                                    <%--${item.state }--%>
+                                <c:if test="${item.state==0}">
+                                    空
+                                </c:if>
+                                <c:if test="${item.state==1}">
+                                    已预订
+                                </c:if>
+                                <c:if test="${item.state==2}">
+                                    已入住
+                                </c:if>
+                            </td>
                             <td>
                                 <a id="ae" href="AdminServlet?type=queryByRoomNum&roomNum=${item.roomNum }">编辑</a>
-<%--                                <a id="ad" onclick="delHotel(${item.roomNum })">删除</a>--%>
+                                    <%--                                <a id="ad" onclick="delHotel(${item.roomNum })">删除</a>--%>
                                 <a id="ad" href="AdminServlet?type=delHotel&roomNum=${item.roomNum }">删除</a>
                             </td>
                         </tr>
@@ -259,7 +281,7 @@
         if (r === true) {
             $.ajax({
                 type: "post",
-                url: "AdminServlet?type=delHotel&roomNum="+roomNum,
+                url: "AdminServlet?type=delHotel&roomNum=" + roomNum,
                 data: {roomNum: roomNum},
                 dataType: "json",
                 success: function (data) {
