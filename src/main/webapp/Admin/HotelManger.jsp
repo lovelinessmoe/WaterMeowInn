@@ -210,7 +210,7 @@
                             <td>
                                     <%--${item.state }--%>
                                 <c:if test="${item.state==0}">
-                                    空
+                                    未使用
                                 </c:if>
                                 <c:if test="${item.state==1}">
                                     已预订
