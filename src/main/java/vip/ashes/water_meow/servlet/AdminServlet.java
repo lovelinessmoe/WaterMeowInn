@@ -105,7 +105,7 @@ public class AdminServlet extends HttpServlet {
                 HashMap<String, String> map = new HashMap<>();
                 if (adminService.addHotelInfo(roomNum, price, type1, state) > 0) {
 //                    response.sendRedirect("HotelManger.jsp");
-                    response.sendRedirect("../AdminServlet?type=hotelList");
+                    response.sendRedirect("AdminServlet?type=hotelList");
 
                     map.put("status", "success");
                     map.put("message", "添加成功");
@@ -118,7 +118,8 @@ public class AdminServlet extends HttpServlet {
             }
 
             case "queryByRoomNum": {
-                String roomNum = request.getParameter("roomNum");
+                String roomNum = new String(request.getParameter("roomNum").getBytes("ISO-8859-1"), "UTF-8");
+//                String roomNum = request.getParameter("roomNum");
                 Hotel hotel = null;
                 hotel = adminService.queryByRoomNum(roomNum);
                 if(hotel!=null){
@@ -139,7 +140,7 @@ public class AdminServlet extends HttpServlet {
                 if (adminService.queryByRoomNum(roomNum)!=null) {
                     //修改
                     if (adminService.editHotelInfo(roomNum, price, type1, state)) {
-                        response.sendRedirect("../AdminServlet?type=hotelList");
+                        response.sendRedirect("AdminServlet?type=hotelList");
                         System.out.println("修改成功");
                     } else {
                         System.out.println("修改失败！");
@@ -152,7 +153,7 @@ public class AdminServlet extends HttpServlet {
                     BigDecimal price1 = BigDecimal.valueOf(p);
                     if (adminService.addHotelInfo(roomNum, price1, type1, state) > 0) {
 //                    response.sendRedirect("HotelManger.jsp");
-                        response.sendRedirect("../AdminServlet?type=hotelList");
+                        response.sendRedirect("AdminServlet?type=hotelList");
 
                         map.put("status", "success");
                         map.put("message", "添加成功");
@@ -196,7 +197,7 @@ public class AdminServlet extends HttpServlet {
                     userBean.setId(0);
                 }
                 request.setAttribute("editingUserBean", userBean);
-                request.getRequestDispatcher("userEdit.jsp").forward(request, response);
+                request.getRequestDispatcher("Admin/userEdit.jsp").forward(request, response);
                 break;
             }
             case "editUserHandle": {

@@ -25,7 +25,7 @@
             overflow:hidden;
         }
 
-        input, textarea, button {
+        input, textarea, button ,select{
             font-family: 'Nunito', sans-serif;
         }
 
@@ -54,7 +54,7 @@
             overflow: hidden;
         }
 
-        input, textarea {
+        input, textarea ,select {
             padding: 8px 10px;
             margin: 3px 8px 16px 8px;
             background-color: rgba(222, 239, 248, 0.877);
@@ -154,10 +154,18 @@
         账号：<input type="text" name="account" value="${editingUserBean.account }"><br>
         密码：<input type="text" name="password" value="${editingUserBean.password }"><br>
         姓名：<input type="text" name="name" value="${editingUserBean.name }"><br>
-        性别：<input type="text" name="sex" value="${editingUserBean.sex }"><br>
-        生日：<input type="text" name="birth" value="${editingUserBean.birth }"><br>
+        性别：
+        <select name="sex" >
+            <option value="0" ${editingUserBean.sex ==0?"selected":""}>女</option>
+            <option value="1" ${editingUserBean.sex ==1?"selected":""}>男</option>
+        </select><br>
+        生日：<input type="date" name="birth" value="${editingUserBean.birth }"><br>
         电话：<input type="text" name="mob" value="${editingUserBean.mob }"><br>
-        类型：<input type="text" name="type1" value="${editingUserBean.type }"><br>
+        类型：
+        <select name="type1" >
+            <option value="1" ${editingUserBean.type ==1?"selected":""}>管理员</option>
+            <option value="2" ${editingUserBean.type ==2?"selected":""}>用户</option>
+        </select><br>
         <input type="submit" value="提交" style="color: black;margin-left: 110px">
     </form>
 </div>

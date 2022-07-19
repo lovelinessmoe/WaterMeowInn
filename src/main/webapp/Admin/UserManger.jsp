@@ -162,7 +162,7 @@
             <div>
                 <table class="table">
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>账号</th>
                         <th>密码</th>
                         <th>用户名</th>
@@ -172,13 +172,13 @@
                         <th>用户类型</th>
                         <th>操作</th>
                     </tr>
-                    <c:forEach items="${ubList }" var="item">
+                    <c:forEach items="${ubList }" var="item" varStatus="idxStatus">
                         <tr>
-                            <td>${item.id }</td>
+                            <td>${idxStatus.index +1}</td>
                             <td>${item.account }</td>
                             <td>${item.password }</td>
                             <td>${item.name }</td>
-                            <td>${item.sex }</td>
+                            <td>${item.sex==0?"女":"男" }</td>
                             <td>${item.birth }</td>
                             <td>${item.mob }</td>
                             <td>
