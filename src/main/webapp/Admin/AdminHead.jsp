@@ -13,7 +13,7 @@
 <body>
 <div class="navbar-fluid">
     <div class="navbar-main">
-        <a href="AdminServlet?type=cfList">
+        <a href="AdminServlet?type=hotelList">
             <div class="navbar-main_part1">酒店管理</div>
         </a>
         <a href="AdminServlet?type=userList">

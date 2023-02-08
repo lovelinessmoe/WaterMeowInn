@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
-@WebServlet(name = "EchartServlet", value = "/EchartServlet")
+@WebServlet("/getEchartData")
 public class EchartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

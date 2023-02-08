@@ -3,14 +3,4 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-
-
-    <servlet>
-        <servlet-name>EchartServlet</servlet-name>
-        <servlet-class>vip.ashes.water_meow.servlet.EchartServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>EchartServlet</servlet-name>
-        <url-pattern>/getEchartData</url-pattern>
-    </servlet-mapping>
 </web-app>

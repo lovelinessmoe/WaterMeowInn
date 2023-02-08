@@ -12,6 +12,7 @@
     <title>酒店信息</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -24,7 +25,7 @@
             overflow: hidden;
         }
 
-        input, textarea, button {
+        input, textarea, button, select {
             font-family: 'Nunito', sans-serif;
         }
 
@@ -53,7 +54,8 @@
             overflow: hidden;
         }
 
-        input, textarea {
+        input, textarea, select {
+
             padding: 8px 10px;
             margin: 3px 8px 16px 8px;
             background-color: rgba(222, 239, 248, 0.877);
@@ -158,12 +160,24 @@
 <body>
 
 <div class="wrapper flex_box">
-    <form method="post" action="">
-        <input type="hidden" value="${editingCFBean.id }" name="id">
-        房间：<input type="text" name="roomNum" value="${editingCFBean.roomNum }"><br>
-        价格：<input type="text" name="price" value="${editingCFBean.price }"><br>
-        房型：<input type="text" name="type" value="${editingCFBean.type }"><br>
-        状态：<input type="text" name="state" value="${editingCFBean.state }"><br>
+    <form method="post" action="AdminServlet?type=editHotelInfo">
+        <input type="hidden" value="${hotel.roomNum }" name="id">
+        房间：<input type="text" name="roomNum" value="${hotel.roomNum }"><br>
+        价格：<input type="text" name="price" value="${hotel.price }"><br>
+        房型：
+        <select name="type1">
+            <option value="0" ${hotel.type ==0?"selected":""}>单人间</option>
+            <option value="1" ${hotel.type ==1?"selected":""}>双人大床</option>
+            <option value="2" ${hotel.type ==2?"selected":""}>标间</option>
+        </select>
+        <br>
+        状态：
+        <select name="state" >
+            <option value="0" ${hotel.state ==0?"selected":""}>未使用</option>
+            <option value="1" ${hotel.state ==1?"selected":""}>已预订</option>
+            <option value="2" ${hotel.state ==2?"selected":""}>已入住</option>
+        </select>
+        <br>
         <input type="submit" onclick="saveOrEdit()" value="提交" style="color: black;margin-left: 120px ">
     </form>
 </div>
@@ -172,23 +186,46 @@
 
 <script src="js/script.js"></script>
 <script>
-    function saveOrEdit(id) {
-        if($["name='id'"].val()){
+    function saveOrEdit() {
+        var data = data.responseFields;
+        console.log(data);
+        if ($["name='id'"].val() != "" && $["name='id'"].val() != null) {
             //修改
-        }else{
+            $.ajax({
+                type: "post",
+                url: "AdminServlet?type=editHotelInfo",
+                data: {
+                    id: $["name='id'"].val(), roomNum: $["name='roomNum'"].val(),
+                    price: $["name='price'"].val(), type: $["name='type1'"].val(), state: $["name='state'"].val()
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.status === "success") {
+                        alert(data.message);
+                        // window.location.href = "AdminServlet?type=hotelList";
+                    } else {
+                        alert(data.message);
+                    }
+                }
+
+            });
+        } else {
             //保存
             var r = confirm("确定要添加该项酒店信息吗？");
             if (r === true) {
+                obj.form.action = "AdminServlet?type=addHotelInfo";
                 $.ajax({
                     type: "post",
-                    url: "?type=addHotelInfo",
-                    data:{id:$["name='id'"].val(),roomNum:$["name='roomNum'"].val(),
-                    price:$["name='price'"].val(),type:$["name='type'"].val(),state:$["name='state'"].val()},
+                    url: "AdminServlet?type=addHotelInfo",
+                    data: {
+                        id: $["name='id'"].val(), roomNum: $["name='roomNum'"].val(),
+                        price: $["name='price'"].val(), type: $["name='type1'"].val(), state: $["name='state'"].val()
+                    },
                     dataType: "json",
                     success: function (data) {
                         if (data.status === "success") {
                             alert(data.message);
-                            window.location.href = "AdminServlet?type=cfList";
+                            // window.location.href = "type=cfList";
                         } else {
                             alert(data.message);
                         }
